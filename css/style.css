@@ -1,5 +1,6 @@
 body {
-  height: 100%
+  height: 100%;
+  background-color: black;
 }
 
 header {
@@ -78,4 +79,14 @@ header {
 
 .keyboard-row button.wide-button {
   flex-grow: 1.5;
+}
+
+
+/* footer Styling */
+footer {
+  background-color: black;
+  color: gainsboro;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
