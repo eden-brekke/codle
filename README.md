@@ -25,3 +25,5 @@ Create Words to be guessed.
 
 Project Management Tool: 
 [GitHub Projects](https://github.com/Team-Salt-Lake-City/code-wordle/projects/1)
+
+[Codle Flowchart](/wireframes/codleflowchart.png)
