@@ -1,17 +1,56 @@
+/* Color Palette 
+Very Dark Blue: #0B0C10
+Grey Navy Blue: #1F2833 
+Light Grey: #C5C6C7
+Turquoise: #66FCF1
+Muted Turquoise: #45A29E  */
+
 body {
   height: 100%;
-  background-color: black;
+  background-color: #0B0C10;
+  color: #C5C6C7;
 }
 
 header {
   border-bottom: 1px solid rgb(58, 58, 60);
 }
- h1 {
+.title {
    color: gainsboro;
    font-size: 2.5rem;
    font-weight: bold;
    margin: 0.4rem 0 0.4rem 0;
    text-align: center;
+ }
+
+ .menu-left {
+   display: flex;
+   margin: 0;
+   padding: 0;
+   align-items: center;
+   width: auto;
+   justify-content: flex-start;
+   color: gainsboro;
+   font-size: 1.5rem;
+   margin: 5px;
+ }
+ .menu-right {
+   display: flex;
+   width: auto;
+   justify-content: flex-end;
+   align-items: center;
+   font-size: 1.5rem;
+   margin: 5px;
+   color: gainsboro;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    background-color: rgb(250, 186, 223);
+    color: black;
+    padding: 3px;
+    border-radius: 5px;
  }
 
 #container {
@@ -71,6 +110,7 @@ header {
   border-radius: 4px;
   user-select: none;
   transition: 350ms;
+  width: 20px;
 }
 
 .keyboard-row button:hover {
