@@ -24,4 +24,4 @@ Create User Data Object
 Create Words to be guessed.  
 
 Project Management Tool: 
-GitHub Projects. 
+[GitHub Projects](https://github.com/Team-Salt-Lake-City/code-wordle/projects/1)
