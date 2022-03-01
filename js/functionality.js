@@ -66,8 +66,15 @@ function greenLetter() {
 
 }
 
+// turns letter on keyboard dark color and disables letter button on keyboard.
+// TODO:
+function wrongLetter(){
+
+}
 
 // function sets data into local storage
+// TODO: get data and stringify it.
+// TODO: setItem with key and value.
 function setToLocalStorage() {
   
 }
@@ -83,11 +90,22 @@ function winOrLose() {
 
 // ------------ EVENT HANDLERS -------------
 
-
-// gets users guess from index.html and passes to the processing functions < triggered by user pressing enter or submit button on game board.
-// TODO: 
-function userGuess(event) {
+// places letter on board when user selects letter on keyboard.
+// TODO: Takes in selected letter from on screen keyboard, displays it on game board.
+function placeLetter(event) {
 
 }
 
-// 
+// removes letter from board when user pressed delete button on keyboard.
+// TODO: removes last letter added to game board when delete button is pressed.
+function removeLetter(event) {
+
+}
+
+// gets users guess from index.html and passes to the processing functions < triggered by user pressing enter or submit button on game board.
+// TODO: save users guess letters.
+// TODO: place all letters in a Array.
+// TODO: returns that guess variable for other functions to use.
+function userGuess(event) {
+
+}
