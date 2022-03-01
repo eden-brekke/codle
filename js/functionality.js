@@ -2,6 +2,7 @@
 
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
+let key = document.querySelector('[data-key]');
 // This page will contain the functions for use within app.js.
 
 // ------------ FUNCTIONS ------------------
@@ -216,7 +217,7 @@ function shakeTile(tiles) {
 //This function is going to need to be re-worked a LOT i think with other people's functions in mind but for now this is how my brains figured it out -EB
 function flipTile(tile, index, array, guess) {
   let letter = tile.dataset.letter;
-  let key = keyboard.querySelector(`[data-key="${letter}"]`);
+ 
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
