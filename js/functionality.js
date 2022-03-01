@@ -199,5 +199,7 @@ function flipTile(tile, index, array, guess) {
   );
 }
 
+
+
 // -------------- EVENT LISTENERS ---------------
 document.addEventListener("click", handleMouseClick);
