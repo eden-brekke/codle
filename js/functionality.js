@@ -21,40 +21,30 @@ let endGameAlert = document.getElementById('alert-container');
 
 //local storage use
 let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
+let results;
 
 if (parsedResults) {
-  let results = parsedResults
+  results = parsedResults;
 }
 else {
-  let results = {
-    roundsPlayed: 0,
-    roundsWon: 0,
-    winPercent: (this.roundsPlayed / this.roundsWon) * 100,
+  results = {
+    roundsPlayed: 20,
+    roundsWon: 10,
+    winPercent: 0,
     currentStreak: 0,
     bestStreak: 0,
+    percentCalc: function() {
+      let percent = (parseInt(this.roundsWon) / parseInt(this.roundsPlayed)) * 100;
+      this.winPercent = percent;
+    },
   };
+  results.percentCalc();
 }
-
-
 
 // DONE: generate a random number in relation to the length of the words array.
 function randIndexGenerator(wordsArr) {
   let randIndex = Math.floor(Math.random() * wordsArr.length);
   return randIndex;
-}
-
-
-// this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
-// TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck(userGuess, word) {
-  for (let i = 0; i < word.legnth; i++) {
-    if (word.contains(userGuess[i])) {
-      indexCheck(userGuess[i]) // if this returns true > turn letter green. 
-      return
-    } else {
-      //turn letterYellow
-    }
-  }
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
@@ -71,14 +61,20 @@ function wordCheck(userGuess, word) {
     return true;
   } else {
     return false;
-
   }
 }
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
 function letterCheck() {
-
+  for (let i = 0; i < word.legnth; i++) {
+    if (word.contains(userGuess[i])) {
+      indexCheck(userGuess[i]) // if this returns true > turn letter green. 
+      return
+    } else {
+      //turn letterYellow
+    }
+  }
 }
 
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
@@ -103,7 +99,6 @@ function setToLocalStorage() {
 // DONE: on lose should reset currentStreak to zero
 // TODO: test functionality, iterate.
 function winOrLose() {
-
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
   h3Elem.textContent = currentWord;
@@ -111,10 +106,8 @@ function winOrLose() {
   let pElem = document.createElement('p');
   pElem.textContent = currentDesc;
   endGameAlert.appendChild(pElem);
-
   //increment roundsPlayed
   results.roundsPlayed++;
-
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
   if (won) {
     results.roundsWon++;
@@ -123,22 +116,18 @@ function winOrLose() {
   else {
     results.currentStreak = 0;
   }
-
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestSteak = results.currentStreak;
   }
-
   //play again button
   let playAgainButton = document.createElement('button');
   playAgainButton.textContent = 'Play Again';
   endGameAlert.appendChild(playAgainButton);
-
   //view results button
   let resultsButton = document.createElement('button');
   resultsButton.textContent = 'Results';
   endGameAlert.appendChild(resultsButton);
-
 }
 
 // ------------ EVENT HANDLERS -------------
@@ -170,7 +159,6 @@ function pressKey(key) {
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
 }
 
-
 function getActiveTile() {
   return guessGrid.querySelectorAll('[data-state="active"]'); // grab the guessing grid from index.html and set all their data-states to active -EB
 }
@@ -197,8 +185,7 @@ function userGuess() {
     alert('Not Enough Letter!');
     shakeTile(activeTile);
     return;
-  }
-
+  } 
   let guess = getActiveTile((function (word, tile) {
     return word + tile.dataset.letter;
   }, ''));
@@ -215,7 +202,7 @@ function userGuess() {
 }
 
 // ------------- ANIMATIONS ------------
-4
+
 function shakeTile(tiles) {
   tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
     tile.classList.add('shake'); // shake is reference to CSS style -EB
@@ -236,7 +223,7 @@ function flipTile(tile, index, array, guess) {
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
-
+  
   tile.addEventListener(
     'transitionEnd',
     function () {
@@ -267,4 +254,5 @@ function flipTile(tile, index, array, guess) {
 }
 
 // -------------- EVENT LISTENERS ---------------
-document.addEventListener("click", handleMouseClick)
+
+document.addEventListener("click", handleMouseClick);
