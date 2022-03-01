@@ -32,7 +32,7 @@ else {
     bestStreak: 0,
   };
 }
-
+winOrLose();
 //reassigned results.winPercent with proper value - would return null if this function was a method of results
 function percentCalc() {
   let percent = (parseInt(results.roundsWon) / parseInt(results.roundsPlayed)) * 100;
@@ -107,7 +107,7 @@ function winOrLose() {
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (wordCheck(userGuess, word)) {
+  if (true) {
     results.roundsWon++;
     results.currentStreak++;
   }
@@ -252,7 +252,9 @@ function flipTile(tile, index, array, guess) {
   );
 }
 
-
+function handlePlayAgain(){
+  playGame();
+}
 
 // -------------- EVENT LISTENERS ---------------
 
