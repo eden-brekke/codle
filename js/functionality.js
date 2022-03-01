@@ -124,9 +124,12 @@ function winOrLose() {
   playAgainButton.textContent = 'Play Again';
   endGameAlert.appendChild(playAgainButton);
   //view results button
+  let aElem = document.createElement('a');
+  aElem.href = '/results.html';
   let resultsButton = document.createElement('button');
   resultsButton.textContent = 'Results';
-  endGameAlert.appendChild(resultsButton);
+  aElem.appendChild(resultsButton);
+  endGameAlert.appendChild(aElem);
 }
 
 // ------------ EVENT HANDLERS -------------
