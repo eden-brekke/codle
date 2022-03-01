@@ -2,6 +2,7 @@
 
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
+let keyboard = document.querySelector('[data-keyboard]');
 let key = document.querySelector('[data-key]');
 // This page will contain the functions for use within app.js.
 
