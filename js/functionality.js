@@ -34,21 +34,27 @@ else {
     bestStreak: 0,
 }
 
-// TODO: generate a random number in relation to the length of the words array.
-function randIndexGenerator() {
-
+// DONE: generate a random number in relation to the length of the words array.
+function randIndexGenerator(wordsArr) {
+  let randIndex = Math.floor(Math.random() * wordsArr.length);
+  return randIndex;
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
-// TODO: get function to return a word for game play.
-function wordSelector() {
-
+// DONE: get function to return a word for game play.
+function wordSelector(wordsArr) {
+  let word = wordsArr[randIndexGenerator(wordsArr)];
+  return word;
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
 // TODO: get function to check that index and content of guess word === selected word
-function wordCheck() {
-
+function wordCheck(userGuess, word) {
+  if (userGuess === word) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
@@ -62,7 +68,6 @@ function letterCheck() {
 function indexCheck() {
 
 }
-
 
 // function sets data into local storage
 // TODO: get data and stringify it.
