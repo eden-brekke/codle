@@ -55,8 +55,38 @@ header {
 
 /* main styling */
 
-
+#team {
+  background-color: #70819B;
+  width: auto;
+}
 
 /* footer styling */
+.foot-left{
+  display: flex;
+  margin: 5px;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-start;
+  color: gainsboro;
+  font-size: 1.2rem;
+}
 
-footer {}
+
+.foot-mid {
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+}
+
+.foot-right{
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  color: gainsboro;
+}

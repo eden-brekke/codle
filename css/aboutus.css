@@ -14,6 +14,7 @@ body {
 
 header {
   border-bottom: 1px solid rgb(58, 58, 60);
+  margin-bottom: 10px;
 }
 .title {
    color: gainsboro;
@@ -54,26 +55,79 @@ a:hover {
     border-radius: 5px;
   }
 
-#toc {}
-
-#toc li {
-  
+#toc {
+  border-top: 1px solid rgb(58, 58, 60);
+  margin-top: 10px;
 }
 
-
-
+#toc li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3px;
+  font-size: 1.2rem;
+  color: #70819B;
+}
 
 /* main styling */
 
-#team {}
+#team-container {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  flex-grow: 1;
+  grid-template-columns: repeat(2, 10em, 6em);
+  grid-template-rows: repeat(4, 15em);
+  gap: .25em;
+  margin-bottom: 1em;
+}
 
-#ben {}
+#eden {
+  background-color: #eea7d0;
+  color:#0B0C10;
+  border-color: #70819B;
+  border-width: 5px;
+  border-radius: 5px;
+  border-style: groove;
+  font-size: 1.2rem;
+  padding: 20px;
+}
 
-#tay {}
-
-#eden{}
 
 /* footer */
 
-footer {}
+footer {
+  /* display: flex; */
+}
+
+.foot-left{
+  display: flex;
+  margin: 5px;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-start;
+  color: gainsboro;
+  font-size: 1.2rem;
+}
+
+
+.foot-mid {
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+}
+
+.foot-right{
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  color: gainsboro;
+}
 
