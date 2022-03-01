@@ -39,8 +39,6 @@ function percentCalc() {
   results.winPercent = percent;
 }
 
-
-
 // DONE: generate a random number in relation to the length of the words array.
 function randIndexGenerator(wordsArr) {
   let randIndex = Math.floor(Math.random() * wordsArr.length);
@@ -109,7 +107,7 @@ function winOrLose() {
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (wordCheck()) {
+  if (wordCheck(userGuess, word)) {
     results.roundsWon++;
     results.currentStreak++;
   }
@@ -254,6 +252,9 @@ function flipTile(tile, index, array, guess) {
   );
 }
 
+
+
 // -------------- EVENT LISTENERS ---------------
 
 document.addEventListener("click", handleMouseClick);
+document.addEventListener('click', handlePlayAgain);
