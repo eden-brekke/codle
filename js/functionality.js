@@ -26,8 +26,9 @@ function checkResults() {
 }
 
 // TODO: generate a random number in relation to the length of the words array.
-function randIndexGenerator() {
-
+function randIndexGenerator(wordsArr) {
+  let randIndex = Math.floor(Math.random() * wordsArr.length);
+  return randIndex;
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
