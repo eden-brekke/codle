@@ -3,7 +3,6 @@
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
 let keyboard = document.querySelector('[data-keyboard]');
-let key = document.querySelector('[data-key]');
 // This page will contain the functions for use within app.js.
 
 // ------------ FUNCTIONS ------------------
@@ -222,7 +221,7 @@ function flipTile(tile, index, array, guess) {
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
-  
+  let key = keyboard.querySelector(`[data-key='${letter}']`);
   tile.addEventListener(
     'transitionEnd',
     function () {
