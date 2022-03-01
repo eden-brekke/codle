@@ -13,6 +13,9 @@ else no results,
 instantiate new results object to increment on game win or lose.
 
 */
+//DOM window for winOrLose
+let wordAndDescription = document.getElementById('alert-container');
+
 //local storage use
 let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
 
@@ -89,6 +92,31 @@ function setToLocalStorage() {
 // TODO: should popup with play again or go to results page options.
 // TODO: on lose should reset currentStreak to zero
 function winOrLose() {
+
+  //display word and description - need logic from wordSelector() for currentWord and currentDesc
+  let h3Elem = document.createElement('h3');
+  h3Elem.textContent = currentWord;
+  wordAndDescription.appendChild(h3Elem);
+  let pElem = document.createElement('p');
+  pElem.textContent = currentDesc;
+  wordAndDescription.appendChild(pElem);
+
+  //increment roundsPlayed
+  results.roundsPlayed++;
+
+  //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
+  if(won) {
+    results.roundsWon++;
+    results.currentStreak++;
+  }
+  else {
+    results.currentStreak = 0;
+  }
+
+  //checks currentSteak against best Streak
+  if (results.currentStreak > results.bestStreak) {
+    results.bestSteak = results.currentStreak;
+  }
 
 }
 
