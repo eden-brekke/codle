@@ -25,16 +25,17 @@ function checkResults() {
   };
 }
 
-// TODO: generate a random number in relation to the length of the words array.
+// DONE: generate a random number in relation to the length of the words array.
 function randIndexGenerator(wordsArr) {
   let randIndex = Math.floor(Math.random() * wordsArr.length);
   return randIndex;
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
-// TODO: get function to return a word for game play.
-function wordSelector() {
-
+// DONE: get function to return a word for game play.
+function wordSelector(wordsArr) {
+  let word = wordsArr[randIndexGenerator(wordsArr)];
+  return word;
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
@@ -69,7 +70,7 @@ function greenLetter() {
 
 // turns letter on keyboard dark color and disables letter button on keyboard.
 // TODO:
-function wrongLetter(){
+function wrongLetter() {
 
 }
 
@@ -77,7 +78,7 @@ function wrongLetter(){
 // TODO: get data and stringify it.
 // TODO: setItem with key and value.
 function setToLocalStorage() {
-  
+
 }
 
 // this function handles the win/lose conditions
