@@ -98,15 +98,15 @@ function setToLocalStorage() {
 function winOrLose() {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
-  h3Elem.textContent = currentWord;
+  h3Elem.textContent = word.word;
   endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
-  pElem.textContent = currentDesc;
+  pElem.textContent = word.desc;
   endGameAlert.appendChild(pElem);
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (won) {
+  if (wordCheck(userGuess, word.word)) {
     results.roundsWon++;
     results.currentStreak++;
   }
