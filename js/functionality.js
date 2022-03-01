@@ -7,14 +7,11 @@ let guessGrid = document.querySelector('[data-guess-grid]');
 // ------------ FUNCTIONS ------------------
 
 /*
-
 This function checks for existing game play results within local storage.
 If results
 access them, so counters are incremented correctly on game win or lose.
-
 else no results,
 instantiate new results object to increment on game win or lose.
-
 */
 //DOM window for winOrLose
 let endGameAlert = document.getElementById('alert-container');
