@@ -23,51 +23,88 @@
     <div id="container">
       <div id="game">
         <div id="board-container">
-          <div id="board"></div>
+          <div data-guess-grid class="guess-grid">
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile"></div>
+          </div>
         </div>
-        <div id="keyboard-container">
-          <div class="keyboard-row">
-            <button data-key="q">Q</button>
-            <button data-key="w">W</button>
-            <button data-key="e">E</button>
-            <button data-key="r">R</button>
-            <button data-key="t">T</button>
-            <button data-key="y">Y</button>
-            <button data-key="u">U</button>
-            <button data-key="i">I</button>
-            <button data-key="o">O</button>
-            <button data-key="p">P</button>
-          </div>
-          <div class="keyboard-row">
-            <button data-key="a">A</button>
-            <button data-key="s">S</button>
-            <button data-key="d">D</button>
-            <button data-key="f">F</button>
-            <button data-key="g">G</button>
-            <button data-key="h">H</button>
-            <button data-key="j">J</button>
-            <button data-key="k">K</button>
-            <button data-key="l">L</button>
-          </div>
-          <div class="keyboard-row">
+        <div data-keyboard id="keyboard-container">
+          <!-- <div class="keyboard-row"> -->
+            <button class = "key" data-key="q">Q</button>
+            <button class = "key" data-key="w">W</button>
+            <button class = "key" data-key="e">E</button>
+            <button class = "key" data-key="r">R</button>
+            <button class = "key" data-key="t">T</button>
+            <button class = "key" data-key="y">Y</button>
+            <button class = "key" data-key="u">U</button>
+            <button class = "key" data-key="i">I</button>
+            <button class = "key" data-key="o">O</button>
+            <button class = "key" data-key="p">P</button>
+          <!-- </div> -->
+          <div class="space"></div>
+          <!-- <div class="keyboard-row"> -->
+            <button class = "key" data-key="a">A</button>
+            <button class = "key" data-key="s">S</button>
+            <button class = "key" data-key="d">D</button>
+            <button class = "key" data-key="f">F</button>
+            <button class = "key" data-key="g">G</button>
+            <button class = "key" data-key="h">H</button>
+            <button class = "key" data-key="j">J</button>
+            <button class = "key" data-key="k">K</button>
+            <button class = "key" data-key="l">L</button>
+          <!-- </div> -->
+          <div class="space"></div>
+          <!-- <div class="keyboard-row"> -->
             <button data-key="enter" class ="wide-button">ENTER</button>
-            <button data-key="z">Z</button>
-            <button data-key="x">X</button>
-            <button data-key="c">C</button>
-            <button data-key="v">V</button>
-            <button data-key="b">B</button>
-            <button data-key="n">N</button>
-            <button data-key="m">M</button>
-            <button data-key="delete" class="wide-button">DELETE</button>
-          </div>
+            <button class = "key" data-key="z">Z</button>
+            <button class = "key" data-key="x">X</button>
+            <button class = "key" data-key="c">C</button>
+            <button class = "key" data-key="v">V</button>
+            <button class = "key" data-key="b">B</button>
+            <button class = "key" data-key="n">N</button>
+            <button class = "key" data-key="m">M</button>
+            <button data-key="delete" class= "wide-button">DELETE</button>
+          <!-- </div> -->
         </div>
       </div>
     </div>
   </main>
   <footer>
-    <h4>Code Fellows Real Coders of Salt Lake City feat Audrey Patterson</h4>
+    <p class="foot-left"><a href="https://github.com/Team-Salt-Lake-City/code-wordle">GitHub</a></p> 
+    <p class="foot-mid">Real Coders of Salt Lake City </p>
+    <p class="foot-right">Code Fellows</p>
   </footer>
-  <script src=""></script>
+  <script src="js/app.js"></script>
+  <script src="js/constructors.js"></script>
+  <script src="js/functionality.js"></script>
 </body>
 
 </html>
