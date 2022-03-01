@@ -40,8 +40,12 @@ function wordSelector(wordsArr) {
 
 // this function checks if the users word EXACTLY matches the selected word.
 // TODO: get function to check that index and content of guess word === selected word
-function wordCheck() {
-
+function wordCheck(userGuess, word) {
+  if (userGuess === word) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
