@@ -152,14 +152,6 @@ else {
     nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
   }
 
-  function placeLetter(key) { // function to place the letter in the right spot -EB
-    let activeTile = getActiveTile(); // invokes get active tile function below -EB
-    if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength Variable (5) then return -EB
-    let nextTile = guessGrid.querySelector(':not([data-letter])'); // select a tile that does not currently have a letter in it -EB
-    nextTile.dataset.letter = key.toLowerCase(); // change letters to lower case to allow for comparison to constructor words -EB
-    nextTile.textContent = key; // give tile text in relation to key pressed -EB
-    nextTile.dataset.state = 'active'; // change data state to active -will work with changing letter colors later -EB
-  }
 
   function getActiveTile() {
     return guessGrid.querySelectorAll('[data-state="active"]'); // grab the guessing grid from index.html and set all their data-states to active -EB
@@ -168,12 +160,12 @@ else {
   // removes letter from board when user pressed delete button on keyboard.
   // DONE: removes last letter added to game board when delete button is pressed.
   // TODO: test and fix
-  function removeLetter() { //
-    let activeTile = getActiveTile();
-    let lastTile = activeTile[activeTile.length - 1];
-    if (lastTile === null) return;
-    lastTile.textContent = '';
-    delete lastTile.dataset.state;
+  function removeLetter() { // remove a letter from grid -EB
+    let activeTile = getActiveTile(); // run function getactivetiles which changes grid state to active -EB
+    let lastTile = activeTile[activeTile.length - 1]; // create variable for last tile, as the active times minus 1 - EB
+    if (lastTile === null) return; // if the last tile is null then return.
+    lastTile.textContent = ''; // else make last tile text content blank -EB
+    delete lastTile.dataset.state; // sets delete data state and letter
     delete lastTile.dataset.letter;
   }
 
@@ -188,13 +180,27 @@ else {
       shakeTile(activeTile);
       return;
     }
+
+    let guess = activeTile.reduce((function (word, tile){
+      return word + tile.dataset.letter
+    }, '')
+    if(!wordArr.includes(guess)){
+      alert('Not in word list');
+      shakeTile(activeTile);
+      return;
+    }
+    // I'm iffy about if this will work, the idea is that it removes the event and then flips to active tiles, but I'm not sure which parameters to set -EB
+    document.removeEventListener('click', handleMouseClick);
+    activeTile.forEach(function (...parameters){
+    flipTile(...parameters, guess);
+    });
   }
 
   // ------------- ANIMATIONS ------------
 
   function shakeTile(tiles) {
-    tiles.forEach(function (tile) {
-      tile.classList.add('shake');
+    tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
+      tile.classList.add('shake'); // shake is reference to CSS style -EB
       tile.addEventListener(
         'animationEnd',
         function () {
@@ -208,7 +214,7 @@ else {
   //This function is going to need to be re-worked a LOT i think with other people's functions in mind but for now this is how my brains figured it out -EB
   function flipTile(tile, index, array, guess) {
     let letter = tile.dataset.letter;
-    let key = keyboard.querySelector(`[data-key="${letter}"i]`);
+    let key = keyboard.querySelector(`[data-key="${letter}"]`);
     setTimeout(function () {
       tile.classList.add('flip');
     }, (index * flipAnimationDuration) / 2);
@@ -217,17 +223,17 @@ else {
       'transitionEnd',
       function () {
         tile.classList.remove('flip');
-        if (targetWord[index] === letter) {// using a variable that I haven't defined so this will need to change based on others code -EB
+        if (wordSelector[index] === letter) {// using a variable that I haven't defined so this will need to change based on others code -EB
           tile.dataset.state = 'correct';
           key.classList.add('correct');
-        } else if (targetWord.includes(letter)) {
+        } else if (wordSelector.includes(letter)) {
           tile.dataset.state = 'wrong-location';
           key.classList.add('wrong-location');
         } else {
           tile.dataset.state = 'wrong';
           key.classList.add('wrong');
         }
-        if (index === array.legnth - 1) {
+        if (index === array.length - 1) {
           tile.addEventListener(
             'transitionEnd',
             function () {
