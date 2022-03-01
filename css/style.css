@@ -220,6 +220,22 @@ header {
   color: #C21BA3;
 }
 
+.key.wrong {
+  border: none;
+  background-color: #747475;
+}
+
+.key.correct{
+  border: none;
+  background-color: #92D0CC;
+  color:#0B0C10;
+}
+
+.key.wong-location{
+  border:none;
+  background-color: #C21BA3;
+  color:#0B0C10;
+}
 
 main {
   margin-bottom: 30px;
