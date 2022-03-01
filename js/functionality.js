@@ -14,7 +14,7 @@ instantiate new results object to increment on game win or lose.
 
 */
 //DOM window for winOrLose
-let wordAndDescription = document.getElementById('alert-container');
+let endGameAlert = document.getElementById('alert-container');
 
 //local storage use
 let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
@@ -96,10 +96,10 @@ function winOrLose() {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
   h3Elem.textContent = currentWord;
-  wordAndDescription.appendChild(h3Elem);
+  endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
   pElem.textContent = currentDesc;
-  wordAndDescription.appendChild(pElem);
+  endGameAlert.appendChild(pElem);
 
   //increment roundsPlayed
   results.roundsPlayed++;
@@ -117,6 +117,16 @@ function winOrLose() {
   if (results.currentStreak > results.bestStreak) {
     results.bestSteak = results.currentStreak;
   }
+
+  //play again button
+  let playAgainButton = document.createElement('button');
+  playAgainButton.textContent = 'Play Again';
+  endGameAlert.appendChild(playAgainButton);
+
+  //view results button
+  let resultsButton = document.createElement('button');
+  resultsButton.textContent = 'Results';
+  endGameAlert.appendChild(resultsButton);
 
 }
 
