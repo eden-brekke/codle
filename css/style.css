@@ -144,6 +144,7 @@ header {
     transform: translateY(0);
   }
 }
+
 /* for wrong word */
 .tile.shake{
   animation: shake 250ms ease-in-out;
