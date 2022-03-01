@@ -76,7 +76,8 @@ function wrongLetter(){
 // TODO: get data and stringify it.
 // TODO: setItem with key and value.
 function setToLocalStorage() {
-  
+  let storedResults = JSON.stringify(results);
+  localStorage.setItem('storedResults', storedResults);
 }
 
 // this function handles the win/lose conditions
