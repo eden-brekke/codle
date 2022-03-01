@@ -16,16 +16,22 @@ else no results,
 instantiate new results object to increment on game win or lose.
 
 */
-function checkResults() {
+//DOM window for winOrLose
+let endGameAlert = document.getElementById('alert-container');
 
+//local storage use
+let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
 
-  let results = { // this will need to be placed within function control flow
+if(parsedResults) {
+  let results = parsedResults
+}
+else {
+  let results = {
     roundsPlayed: 0,
     roundsWon: 0,
     winPercent: (this.roundsPlayed / this.roundsWon) * 100,
     currentStreak: 0,
     bestStreak: 0,
-  };
 }
 
 // TODO: generate a random number in relation to the length of the words array.
@@ -62,7 +68,8 @@ function indexCheck() {
 // TODO: get data and stringify it.
 // TODO: setItem with key and value.
 function setToLocalStorage() {
-
+  let storedResults = JSON.stringify(results);
+  localStorage.setItem('storedResults', storedResults);
 }
 
 // this function handles the win/lose conditions
@@ -71,6 +78,41 @@ function setToLocalStorage() {
 // TODO: should popup with play again or go to results page options.
 // TODO: on lose should reset currentStreak to zero
 function winOrLose() {
+
+  //display word and description - need logic from wordSelector() for currentWord and currentDesc
+  let h3Elem = document.createElement('h3');
+  h3Elem.textContent = currentWord;
+  endGameAlert.appendChild(h3Elem);
+  let pElem = document.createElement('p');
+  pElem.textContent = currentDesc;
+  endGameAlert.appendChild(pElem);
+
+  //increment roundsPlayed
+  results.roundsPlayed++;
+
+  //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
+  if(won) {
+    results.roundsWon++;
+    results.currentStreak++;
+  }
+  else {
+    results.currentStreak = 0;
+  }
+
+  //checks currentSteak against best Streak
+  if (results.currentStreak > results.bestStreak) {
+    results.bestSteak = results.currentStreak;
+  }
+
+  //play again button
+  let playAgainButton = document.createElement('button');
+  playAgainButton.textContent = 'Play Again';
+  endGameAlert.appendChild(playAgainButton);
+
+  //view results button
+  let resultsButton = document.createElement('button');
+  resultsButton.textContent = 'Results';
+  endGameAlert.appendChild(resultsButton);
 
 }
 
