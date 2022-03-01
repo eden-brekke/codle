@@ -72,13 +72,7 @@ header {
 
 
 /* guess tile styling */
-/* #board-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  overflow: hidden;
-} */
+
 .guess-grid {
   display: grid;
   justify-content: center;
@@ -102,6 +96,84 @@ header {
   user-select: none;
   transition: transform 250ms linear;
 }
+/* working on tile color changes, there's JS to this that I need to figure out */
+.tile[data-state="active"]{
+  border-color:#92D0CC;
+}
+
+.tile[data-state="wrong"] {
+  border: none;
+  background-color: #747475;
+}
+
+.tile[data-state="correct"]{
+  border: none;
+  background-color: #92D0CC;
+  color:#0B0C10;
+}
+
+.tile[data-state="wrong-location"]{
+  border:none;
+  background-color: #C21BA3;
+  color:#0B0C10;
+}
+
+/* animation workings, there's JS to this that I need to figure out  */
+/* for correct word */
+.tile.dance {
+  animation: dance 500ms ease-in-out;
+}
+
+@keyframes dance {
+  20% {
+    transform: translateY(-50%);
+  }  
+  40% {
+    transform: translateY(5%);
+  }  
+  60% {
+    transform: translateY(-25%);
+  }  
+  80% {
+    transform: translateY(2.5%);
+  }  
+  90% {
+    transform: translateY(-5%);
+  }  
+  100% {
+    transform: translateY(0);
+  }
+}
+/* for wrong word */
+.tile.shake{
+  animation: shake 250ms ease-in-out;
+}
+@keyframes shake {
+  10% {
+    transform: translateX(-5%);
+  }
+  30% {
+    transform: translateX(5%);
+  }
+  50% {
+    transform: translateX(-7.5%);
+  }
+  70% {
+    transform: translateX(7.5%);
+  }
+  90% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* for after each guess */
+.tile.flip{
+  transform: rotateX(90deg);
+}
+
 /* keyboard Styling */
 
 #keyboard-container {
