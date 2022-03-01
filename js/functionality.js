@@ -6,6 +6,9 @@ let guessGrid = document.querySelector('[data-guess-grid]');
 
 // ------------ FUNCTIONS ------------------
 
+let guess = [];
+let userGuess;
+
 /*
 This function checks for existing game play results within local storage.
 If results
@@ -30,7 +33,7 @@ else {
     winPercent: 0,
     currentStreak: 0,
     bestStreak: 0,
-    percentCalc: function() {
+    percentCalc: function () {
       let percent = (parseInt(this.roundsWon) / parseInt(this.roundsPlayed)) * 100;
       this.winPercent = percent;
     },
@@ -47,8 +50,9 @@ function randIndexGenerator(wordsArr) {
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
 function wordSelector(wordsArr) {
-  let word = wordsArr[randIndexGenerator(wordsArr)];
+  let word = wordsArr[randIndexGenerator(wordsArr)].word;
   return word;
+  console.log(word)
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
@@ -63,11 +67,11 @@ function wordCheck(userGuess, word) {
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck() {
-  for (let i = 0; i < word.legnth; i++) {
+function letterCheck(userGuess, word) {
+  for (let i = 0; i < word.length; i++) {
     if (word.contains(userGuess[i])) {
       indexCheck(userGuess[i]) // if this returns true > turn letter green. 
-      return
+      return;
     } else {
       //turn letterYellow
     }
@@ -76,8 +80,13 @@ function letterCheck() {
 
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
-function indexCheck() {
+function indexCheck(userGuess, word) {
+  // nested loop
+  // slow loop gets a new letter from userGuess to pass to fast loop.
+  // fast loop checks letter from userGuess against all index locations in word.
+  for (let i = 0; i < word.length; i++) {
 
+  }
 }
 
 // function sets data into local storage
@@ -131,11 +140,11 @@ function winOrLose() {
 
 function handleMouseClick(event) {
   if (event.target.matches('[data-key]')) { // if the click matches anything with the data-attribute data-key -EB
-    pressKey(event.target.dataset.key); // press the key! -EB
+    addLetter(event.target.dataset.key); // press the key! -EB
     return;
   }
   if (event.target.matches('[data-enter]')) { // data-enter is assigned to enter key so that when you press it it will invoke the userGuess -EB
-    userGuess();
+    guessAlert();
     return;
   }
   if (event.target.matches('[data-delete]')) { // data-delete is assigned to the delete key so that when you press it it will invoke the removeLetter function -EB
@@ -147,13 +156,15 @@ function handleMouseClick(event) {
 // places letter on board when user selects letter on keyboard.
 // DONE: Takes in selected letter from on screen keyboard, displays it on game board.
 // TODO: Test and fix. 
-function pressKey(key) {
+function addLetter(key) {
   let activeTile = getActiveTile(); // invoke get Active tile function below -EB
   if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength variable (5) then return -eb
-  let nextTile = guessGrid.querySelector(':not([data-letter'); // makes the next active tile be one without a data-type letter -EB
+  let nextTile = guessGrid.querySelector(':not([data-letter]'); // makes the next active tile be one without a data-type letter -EB
   nextTile.dataset.letter = key.toLowerCase(); // ensures letter types are read as lowercase to compare to our constructor words -EB
   nextTile.textContent = key; // Makes text content of the next tile match the key that was pressed, each key is assigned their own letter in HTML -EB
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
+  guess.push(key);
+  console.log(guess);
 }
 
 function getActiveTile() {
@@ -166,40 +177,35 @@ function getActiveTile() {
 function removeLetter() { // remove a letter from grid -EB
   let activeTile = getActiveTile(); // run function getactivetiles which changes grid state to active -EB
   let lastTile = activeTile[activeTile.length - 1]; // create variable for last tile, as the active times minus 1 - EB
+  let removedTile = guessGrid.querySelector(':not([data-letter]');
+
   if (lastTile === null) return; // if the last tile is null then return.
   lastTile.textContent = ''; // else make last tile text content blank -EB
   delete lastTile.dataset.state; // sets delete data state and letter
   delete lastTile.dataset.letter;
+  guess.pop();
+  console.log(guess);
 }
 
-// gets users guess from index.html and passes to the processing functions < triggered by user pressing enter or submit button on game board.
-// TODO: save users guess letters.
-// TODO: place all letters in a Array.
-// TODO: returns that guess variable for other functions to use.
-function userGuess() {
+
+function guessAlert() {
   let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
   if (activeTile.length !== wordLength) {
-    alert('Not Enough Letter!');
+    alert('Not Enough Letters!');
     shakeTile(activeTile);
     return;
-  } 
-  let guess = getActiveTile((function (word, tile) {
-    return word + tile.dataset.letter;
-  }, ''));
+  }
   if (!wordsArr.includes(guess)) {
     alert('Not in word list');
     shakeTile(activeTile);
     return;
   }
   // I'm iffy about if this will work, the idea is that it removes the event and then flips to active tiles, but I'm not sure which parameters to set -EB
-  document.removeEventListener('click', handleMouseClick);
-  activeTile.forEach(function (...parameters) {
-    flipTile(...parameters, guess);
-  });
 }
 
 // ------------- ANIMATIONS ------------
 
+// This only works once. needs work. 
 function shakeTile(tiles) {
   tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
     tile.classList.add('shake'); // shake is reference to CSS style -EB
@@ -208,7 +214,7 @@ function shakeTile(tiles) {
       function () {
         tile.classList.remove('shake');
       },
-      { once: true }
+      // { once: true }
     );
   });
 }
@@ -220,7 +226,7 @@ function flipTile(tile, index, array, guess) {
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
-  
+
   tile.addEventListener(
     'transitionEnd',
     function () {
