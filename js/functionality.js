@@ -13,16 +13,19 @@ else no results,
 instantiate new results object to increment on game win or lose.
 
 */
-function checkResults() {
+//local storage use
+let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
 
-
-  let results = { // this will need to be placed within function control flow
+if(parsedResults) {
+  let results = parsedResults
+}
+else {
+  let results = {
     roundsPlayed: 0,
     roundsWon: 0,
     winPercent: (this.roundsPlayed / this.roundsWon) * 100,
     currentStreak: 0,
     bestStreak: 0,
-  };
 }
 
 // TODO: generate a random number in relation to the length of the words array.
