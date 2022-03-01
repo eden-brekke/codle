@@ -13,11 +13,12 @@ let alertContainer = document.querySelector("[data-alert-container]");
 
 
 
-
-
 // --------------- CONTROL FLOW ---------------
 
+// main game play function.
+function playGame() {
 
+}
 
 
 
