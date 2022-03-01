@@ -43,6 +43,19 @@ function randIndexGenerator(wordsArr) {
   return randIndex;
 }
 
+
+  // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
+  // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
+  function letterCheck(userGuess, word) {
+    for (let i = 0; i < word.legnth; i++) {
+      if (word.contains(userGuess[i])) {
+        indexCheck(userGuess[i]) // if this returns true > turn letter green. 
+        return
+      } else {
+        //turn letterYellow
+      }
+    }
+
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
 function wordSelector(wordsArr) {
@@ -57,6 +70,7 @@ function wordCheck(userGuess, word) {
     return true;
   } else {
     return false;
+
   }
 }
 
