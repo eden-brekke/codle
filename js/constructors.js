@@ -5,9 +5,6 @@
 
 // Array of words
 
-// var wordsArr = [];
-
-
 // word object constructor.
 
 function Word(word, desc) {
