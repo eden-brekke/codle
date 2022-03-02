@@ -7,10 +7,10 @@ let guessGrid = document.querySelector('[data-guess-grid]');
 
 // ------------ FUNCTIONS ------------------
 
-let guess = [];
-let userGuess = '';
-let word = wordSelector();
 
+let userGuess = '';
+let guess = [];
+userGuess = guess.join('');
 /*
 This function checks for existing game play results within local storage.
 If results
@@ -22,20 +22,20 @@ instantiate new results object to increment on game win or lose.
 let endGameAlert = document.getElementById('alert-container');
 
 //local storage use
-let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
-let results;
+// let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
+// let results;
 
-if (parsedResults) {
-  results = parsedResults;
-} else {
-  results = {
-    roundsPlayed: 0,
-    roundsWon: 0,
-    winPercent: 0,
-    currentStreak: 0,
-    bestStreak: 0,
-  };
-}
+// if (parsedResults) {
+//   results = parsedResults;
+// } else {
+//   results = {
+//     roundsPlayed: 0,
+//     roundsWon: 0,
+//     winPercent: 0,
+//     currentStreak: 0,
+//     bestStreak: 0,
+//   };
+// }
 
 //reassigns results.winPercent with proper value - would return null if this function was a method of results
 function percentCalc() {
@@ -53,7 +53,7 @@ function randIndexGenerator() {
 // DONE: get function to return a word for game play.
 function wordSelector() {
   let word = Word.wordsArr[randIndexGenerator()].word;
-  return word;
+  //return word;
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
@@ -76,16 +76,15 @@ function wordCheck() { // works
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
 function letterCheck() {
   //let checkWord = toString(word.word);
-  console.log(word);
+  // console.log(word);
   for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
       //tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
       //key.classList.add('wrong-location');
       // console.log(word);
 
-      console.log(userGuess[i]);
       // output is : returns the index of i, IF i index in userGuess is in word. 
-      console.log(i);
+
     }
   }
 }
@@ -94,11 +93,9 @@ function letterCheck() {
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck() {
   for (let i = 0; i < wordLength; i++) {
-    
+
     if (word[i] === userGuess[i]) {
-      console.log(word[i], ' word index i')
-      console.log(userGuess[i],' userguess index i')
-      console.log(i, ' This index is a match')
+
       // if this condition true turn tile and keyboard key green and disable that key
       // tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
       // key.classList.add('correct');
@@ -127,7 +124,7 @@ function winOrLose() {
   h3Elem.textContent = 'word.word';
   endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
-  pElem.textContent = 'word.desc';
+  pElem.textContent = 'word.desc'; // Word.word.desc
   endGameAlert.appendChild(pElem);
   //increment roundsPlayed
   results.roundsPlayed++;
@@ -186,6 +183,7 @@ function addLetter(key) {
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
   guess.push(key);
   console.log(guess);
+  userGuess = guess.join('');
 }
 
 function getActiveTile() {
@@ -279,11 +277,88 @@ function flipTile(tile, index, array, guess) {
 }
 */
 
-function handlePlayAgain(){
-  playGame();
-}
+// function handlePlayAgain() {
+//   if ((event.target.matches('[data-enter]'))) {
+//     playGame();
+//   }
+// }
+
+
+/*
+
+Everything bellow here is from app.js for testing
+
+*/
+
+
+// --------------- CONTROL FLOW ---------------
+
+// main game play function.
+// Comments above function calls, apply to which box on flowchart is being called.
+// word objects instantiated on page load.
+
+let wordLength = 5;
+let flipAnimationDuration = 500;
+let danceAnimationDuration = 500;
+
+
+
+function playGame() {
+
+  // checking local storage for past results.
+  let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
+  let results;
+  let attempts = 0
+
+  // if localStorage results exist load, else create results.
+  if (parsedResults) {
+    results = parsedResults;
+  } else {
+    results = {
+      roundsPlayed: 0,
+      roundsWon: 0,
+      winPercent: 0,
+      currentStreak: 0,
+      bestStreak: 0,
+    };
+  }
+
+  // gameplay begins
+  let word = '';
+  // word = wordSelector(); // getting  word for play.
+
+  // receive guess from user >> happens on user press of submit button.
+  // check guess with wordCheck/letterCheck/indexCheck.
+
+  function enterClicked() {
+    if ((event.target.matches('[data-enter]'))) {
+      if (wordCheck() === true) {
+        winOrLose();
+      } else {
+        letterCheck(); // return indexs in userguess that are in word
+        indexCheck();
+
+      }
+    }
+  }
+
+
+  document.addEventListener("click", enterClicked);
+
+} // << gameplay function closing squiggle
+
+playGame();
 
 // -------------- EVENT LISTENERS ---------------
 
+/*
+
+from app.js
+
+*/
+
+
+// End of app JS listeners ^^^
+
 document.addEventListener("click", handleMouseClick);
-document.addEventListener('click', handlePlayAgain);
+// document.addEventListener('click', handlePlayAgain);
