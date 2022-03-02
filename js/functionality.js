@@ -217,7 +217,6 @@ function shakeTile(tiles) {
 //This function is going to need to be re-worked a LOT i think with other people's functions in mind but for now this is how my brains figured it out -EB
 function flipTile(tile, index, array, guess) {
   let letter = tile.dataset.letter;
- 
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
