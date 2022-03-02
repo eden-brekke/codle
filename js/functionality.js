@@ -42,17 +42,16 @@ else {
 }
 
 // DONE: generate a random number in relation to the length of the words array.
-function randIndexGenerator(wordsArr) {
+function randIndexGenerator() {
   let randIndex = Math.floor(Math.random() * wordsArr.length);
   return randIndex;
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
-function wordSelector(wordsArr) {
-  let word = wordsArr[randIndexGenerator(wordsArr)].word;
+function wordSelector() {
+  let word = wordsArr[randIndexGenerator()].word;
   return word;
-  console.log(word)
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
@@ -69,11 +68,9 @@ function wordCheck(userGuess, word) {
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
 function letterCheck(userGuess, word) {
   for (let i = 0; i < word.length; i++) {
-    if (word.contains(userGuess[i])) {
-      indexCheck(userGuess[i]) // if this returns true > turn letter green. 
-      return;
-    } else {
-      //turn letterYellow
+    if (word.includes(userGuess[i])) {
+      tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
+      key.classList.add('wrong-location');
     }
   }
 }
@@ -81,11 +78,12 @@ function letterCheck(userGuess, word) {
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck(userGuess, word) {
-  // nested loop
-  // slow loop gets a new letter from userGuess to pass to fast loop.
-  // fast loop checks letter from userGuess against all index locations in word.
   for (let i = 0; i < word.length; i++) {
-
+    if (word[i] === userGuess[i]) {
+      // if this condition true turn tile and keyboard key green and disable that key
+      tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
+      key.classList.add('correct');
+    }
   }
 }
 
@@ -184,7 +182,6 @@ function removeLetter() { // remove a letter from grid -EB
   delete lastTile.dataset.state; // sets delete data state and letter
   delete lastTile.dataset.letter;
   guess.pop();
-  console.log(guess);
 }
 
 
@@ -232,13 +229,13 @@ function flipTile(tile, index, array, guess) {
     function () {
       tile.classList.remove('flip');
       if (wordSelector[index] === letter) {// using a variable that I haven't defined so this will need to change based on others code -EB
-        tile.dataset.state = 'correct';
+        tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
         key.classList.add('correct');
       } else if (wordSelector.includes(letter)) {
-        tile.dataset.state = 'wrong-location';
+        tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
         key.classList.add('wrong-location');
       } else {
-        tile.dataset.state = 'wrong';
+        tile.dataset.state = 'wrong'; // turns letter dark gray by adding CSS class
         key.classList.add('wrong');
       }
       if (index === array.length - 1) {
