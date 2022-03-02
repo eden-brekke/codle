@@ -40,7 +40,7 @@ new Word('event', 'JavaScripts interaction with HTML is handled through events t
 
 new Word('error', 'A statement indicating the program isn’t running properly. The tree main error types syntax errors, runtime errors, and logical errors');
 
-new Word('float', 'Library that helps to use inline styles in React components. It doesnt convert styles to CSS or implement special features from CSS like pseudo - classes or media queries.It just helps to use plain inline styles and provides simple way to extend them.');
+new Word('float', 'Library that helps to use inline styles in React components. It doesnt convert styles to CSS or implement special features from CSS like pseudo - classes or media queries. It just helps to use plain inline styles and provides simple way to extend them.');
 
 new Word('parse','Parsing means analyzing and converting a program into an internal format that a runtime environment can actually run, for example the JavaScript engine inside browsers.');
 

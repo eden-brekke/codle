@@ -3,6 +3,7 @@
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
 
+// This page will contain the functions for use within app.js.
 
 // ------------ FUNCTIONS ------------------
 
@@ -26,8 +27,7 @@ let results;
 
 if (parsedResults) {
   results = parsedResults;
-}
-else {
+} else {
   results = {
     roundsPlayed: 0,
     roundsWon: 0,
@@ -58,8 +58,14 @@ function wordSelector() {
 
 // this function checks if the users word EXACTLY matches the selected word.
 // DONE: get function to check that index and content of guess word === selected word
-function wordCheck(userGuess, word) {
+function wordCheck() { // works
+  toString(userGuess);
+
+
   if (userGuess === word) {
+    console.log(word, ' this is the value of word')
+    console.log(userGuess, ' this this the value of userguess')
+
     return true;
   } else {
     return false;
@@ -68,11 +74,18 @@ function wordCheck(userGuess, word) {
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck(userGuess, word) {
+function letterCheck() {
+  //let checkWord = toString(word.word);
+  console.log(word);
   for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
-      tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
-      key.classList.add('wrong-location');
+      //tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
+      //key.classList.add('wrong-location');
+      // console.log(word);
+
+      console.log(userGuess[i]);
+      // output is : returns the index of i, IF i index in userGuess is in word. 
+      console.log(i);
     }
   }
 }
@@ -81,11 +94,14 @@ function letterCheck(userGuess, word) {
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck() {
   for (let i = 0; i < wordLength; i++) {
-    console.log(i);
+    
     if (word[i] === userGuess[i]) {
+      console.log(word[i], ' word index i')
+      console.log(userGuess[i],' userguess index i')
+      console.log(i, ' This index is a match')
       // if this condition true turn tile and keyboard key green and disable that key
-      tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
-      key.classList.add('correct');
+      // tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
+      // key.classList.add('correct');
     }
   }
 }
