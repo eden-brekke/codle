@@ -28,9 +28,9 @@ header {
  .menu-left {
    display: flex;
    padding: 0;
-   align-items: center;
    width: auto;
    justify-content: flex-start;
+   align-items: left;
    color: gainsboro;
    font-size: 1.5rem;
    margin: 5px;
@@ -39,22 +39,35 @@ header {
  .menu-right {
    display: flex;
    width: auto;
-   justify-content: flex-end;
-   align-items: center;
+   justify-content: right;
+   align-items: right;
    font-size: 1.5rem;
    margin: 5px;
    color: gainsboro;
   }
   
   a {
+    color: gainsboro;
     text-decoration: none;
+  }
+  a:visited {
+    text-decoration: none;
+    color: rgb(159, 184, 218);
   }
   a:hover {
     background-color: #92D0CC;
     color: black;
     padding: 3px;
     border-radius: 5px;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    text-decoration: none;
+  }
+  a:focus{
+   text-decoration: none;
  }
+ 
 /* Main styling */
 #container {
   display: flex;
