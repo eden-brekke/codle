@@ -38,7 +38,7 @@ let endGameAlert = document.getElementById('alert-container');
 // }
 
 //reassigns results.winPercent with proper value - would return null if this function was a method of results
-function percentCalc() {
+function percentCalc(results) {
   let percent = (parseInt(results.roundsWon) / parseInt(results.roundsPlayed)) * 100;
   results.winPercent = percent;
 }
@@ -52,15 +52,15 @@ function randIndexGenerator() {
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
 function wordSelector() {
-  let word = Word.wordsArr[randIndexGenerator()].word;
-  //return word;
+  return Word.wordsArr[randIndexGenerator()].word;
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
 // DONE: get function to check that index and content of guess word === selected word
-function wordCheck() { // works
-  toString(userGuess);
-
+function wordCheck(word) { // works
+  // toString(userGuess);
+  console.log(word, ' this is the value of word before if')
+  console.log(userGuess, ' this this the value of userguess before if')
 
   if (userGuess === word) {
     console.log(word, ' this is the value of word')
@@ -70,11 +70,12 @@ function wordCheck() { // works
   } else {
     return false;
   }
+
 }
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck() {
+function letterCheck(word) {
   //let checkWord = toString(word.word);
   // console.log(word);
   for (let i = 0; i < wordLength; i++) {
@@ -91,7 +92,7 @@ function letterCheck() {
 
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
-function indexCheck() {
+function indexCheck(word) {
   for (let i = 0; i < wordLength; i++) {
 
     if (word[i] === userGuess[i]) {
@@ -118,7 +119,7 @@ function setToLocalStorage() {
 // DONE: should popup with play again or go to results page options.
 // DONE: on lose should reset currentStreak to zero
 // TODO: test functionality, iterate.
-function winOrLose() {
+function winOrLose(results, word) {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
   h3Elem.textContent = 'word.word';
@@ -129,14 +130,14 @@ function winOrLose() {
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (wordCheck()) {
+  if (wordCheck(word)) {
     results.roundsWon++;
     results.currentStreak++;
   }
   else {
     results.currentStreak = 0;
   }
-  percentCalc();
+  percentCalc(results);
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestStreak = results.currentStreak;
@@ -182,7 +183,6 @@ function addLetter(key) {
   nextTile.textContent = key; // Makes text content of the next tile match the key that was pressed, each key is assigned their own letter in HTML -EB
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
   guess.push(key);
-  console.log(guess);
   userGuess = guess.join('');
 }
 
@@ -322,21 +322,22 @@ function playGame() {
       bestStreak: 0,
     };
   }
+console.log(results.roundsPlayed);
 
   // gameplay begins
-  let word = '';
-  // word = wordSelector(); // getting  word for play.
+  let word = wordSelector();
+  console.log(word);
 
   // receive guess from user >> happens on user press of submit button.
   // check guess with wordCheck/letterCheck/indexCheck.
 
-  function enterClicked() {
+  function enterClicked(event) {
     if ((event.target.matches('[data-enter]'))) {
-      if (wordCheck() === true) {
-        winOrLose();
+      if (wordCheck(word) === true) {
+        winOrLose(results, word);
       } else {
-        letterCheck(); // return indexs in userguess that are in word
-        indexCheck();
+        letterCheck(word); // return indexs in userguess that are in word
+        indexCheck(word);
 
       }
     }
