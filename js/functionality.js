@@ -7,7 +7,8 @@ let guessGrid = document.querySelector('[data-guess-grid]');
 // ------------ FUNCTIONS ------------------
 
 let guess = [];
-let userGuess;
+let userGuess = '';
+let word = wordSelector();
 
 /*
 This function checks for existing game play results within local storage.
@@ -43,14 +44,14 @@ else {
 
 // DONE: generate a random number in relation to the length of the words array.
 function randIndexGenerator() {
-  let randIndex = Math.floor(Math.random() * wordsArr.length);
+  let randIndex = Math.floor(Math.random() * Word.wordsArr.length);
   return randIndex;
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
 function wordSelector() {
-  let word = wordsArr[randIndexGenerator()].word;
+  let word = Word.wordsArr[randIndexGenerator()].word;
   return word;
 }
 
@@ -67,7 +68,7 @@ function wordCheck(userGuess, word) {
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
 function letterCheck(userGuess, word) {
-  for (let i = 0; i < word.length; i++) {
+  for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
       tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
       key.classList.add('wrong-location');
@@ -77,8 +78,9 @@ function letterCheck(userGuess, word) {
 
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
-function indexCheck(userGuess, word) {
-  for (let i = 0; i < word.length; i++) {
+function indexCheck() {
+  for (let i = 0; i < wordLength; i++) {
+    console.log(i);
     if (word[i] === userGuess[i]) {
       // if this condition true turn tile and keyboard key green and disable that key
       tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
@@ -192,7 +194,7 @@ function guessAlert() {
     shakeTile(activeTile);
     return;
   }
-  if (!wordsArr.includes(guess)) {
+  if (!Word.wordsArr.includes(guess)) {
     alert('Not in word list');
     shakeTile(activeTile);
     return;
