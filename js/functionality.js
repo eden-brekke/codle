@@ -132,7 +132,7 @@ function winOrLose() {
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (won) {
+  if (wordCheck()) {
     results.roundsWon++;
     results.currentStreak++;
   }
