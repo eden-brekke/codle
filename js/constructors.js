@@ -5,7 +5,7 @@
 
 // Array of words
 
-let wordsArr = [];
+var wordsArr = [];
 
 // word object constructor.
 
