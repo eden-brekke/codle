@@ -57,15 +57,15 @@ function wordSelector() {
 
 // this function checks if the users word EXACTLY matches the selected word.
 // DONE: get function to check that index and content of guess word === selected word
-function wordCheck(word) { // works
-  // toString(userGuess);
+function wordCheck(word, tile) { // works
+  let letter = tile.dataset.letter;
+  let key = keyboard.querySelection(`[data-key='${letter}'i]`);
   console.log(word, ' this is the value of word before if')
   console.log(userGuess, ' this this the value of userguess before if')
 
   if (userGuess === word) {
-    console.log(word, ' this is the value of word')
-    console.log(userGuess, ' this this the value of userguess')
-
+    tile.dataset.state = 'correct';
+    key.classList.add('correct');
     return true;
   } else {
     return false;
@@ -75,31 +75,27 @@ function wordCheck(word) { // works
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck(word) {
-  //let checkWord = toString(word.word);
-  // console.log(word);
+function letterCheck(word, tile) {
+  let letter = tile.dataset.letter;
+  let key = keyboard.querySelection(`[data-key='${letter}'i]`);
   for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
-      //tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
-      //key.classList.add('wrong-location');
-      // console.log(word);
-
-      // output is : returns the index of i, IF i index in userGuess is in word. 
-
+      tile.dataset.state = 'wrong-location';
+      key.classList.add('wrong-location');
     }
   }
 }
 
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
-function indexCheck(word) {
+function indexCheck(word, tile) {
+  let letter = tile.dataset.letter;
+  let key = keyboard.querySelection(`[data-key='${letter}'i]`);
   for (let i = 0; i < wordLength; i++) {
 
     if (word[i] === userGuess[i]) {
-
-      // if this condition true turn tile and keyboard key green and disable that key
-      // tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
-      // key.classList.add('correct');
+      tile.dataset.state = 'correct';
+      key.classList.add('correct');
     }
   }
 }
@@ -130,7 +126,7 @@ function winOrLose(results, word) {
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (wordCheck(word)) {
+  if (wordCheck(word, tile)) {
     results.roundsWon++;
     results.currentStreak++;
   }
@@ -309,7 +305,6 @@ function playGame() {
   let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
   let results;
   let attempts = 0
-
   // if localStorage results exist load, else create results.
   if (parsedResults) {
     results = parsedResults;
@@ -333,11 +328,11 @@ console.log(results.roundsPlayed);
 
   function enterClicked(event) {
     if ((event.target.matches('[data-enter]'))) {
-      if (wordCheck(word) === true) {
+      if (wordCheck(word, getActiveTile()) === true) {
         winOrLose(results, word);
       } else {
-        letterCheck(word); // return indexs in userguess that are in word
-        indexCheck(word);
+        letterCheck(word, getActiveTile()); // return indexs in userguess that are in word
+        indexCheck(word, getActiveTile());
 
       }
     }
@@ -363,3 +358,19 @@ from app.js
 
 document.addEventListener("click", handleMouseClick);
 // document.addEventListener('click', handlePlayAgain);
+
+//color
+function colorChange(tile) {
+  let letter = tile.dataset.letter;
+  let key = keyboard.querySelection(`[data-key='${letter}'i]`);
+  if (userGuess[i] === index) {
+    tile.dataset.state = 'correct';
+    key.classList.add('correct');
+  } else if (userGuess.includes(letter)) {
+    tile.dataset.state = 'wrong-location';
+    key.classList.add('wrong-location');
+  } else {
+    tile.dataset.state = 'wrong';
+    key.classList.add('wrong');
+  }
+}
