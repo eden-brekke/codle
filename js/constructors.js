@@ -5,7 +5,8 @@
 
 // Array of words
 
-var wordsArr = [];
+// var wordsArr = [];
+
 
 // word object constructor.
 
@@ -13,8 +14,10 @@ function Word(word, desc) {
   this.word = word;
   this.desc = desc;
 
-  wordsArr.push(this);
+  Word.wordsArr.push(this);
 }
+
+Word.wordsArr = [];
 
 //--------------- CONSTRUCTOR METHODS --------------
 
