@@ -7,6 +7,10 @@ let keyboard = document.querySelector('[data-keyboard]');
 
 // ------------ FUNCTIONS ------------------
 
+let guess = [];
+let userGuess = '';
+let word = wordSelector();
+
 /*
 This function checks for existing game play results within local storage.
 If results
@@ -41,15 +45,15 @@ function percentCalc() {
 }
 
 // DONE: generate a random number in relation to the length of the words array.
-function randIndexGenerator(wordsArr) {
-  let randIndex = Math.floor(Math.random() * wordsArr.length);
+function randIndexGenerator() {
+  let randIndex = Math.floor(Math.random() * Word.wordsArr.length);
   return randIndex;
 }
 
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
-function wordSelector(wordsArr) {
-  let word = wordsArr[randIndexGenerator(wordsArr)];
+function wordSelector() {
+  let word = Word.wordsArr[randIndexGenerator()].word;
   return word;
 }
 
@@ -65,13 +69,11 @@ function wordCheck(userGuess, word) {
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck() {
-  for (let i = 0; i < word.legnth; i++) {
-    if (word.contains(userGuess[i])) {
-      indexCheck(userGuess[i]) // if this returns true > turn letter green. 
-      return
-    } else {
-      //turn letterYellow
+function letterCheck(userGuess, word) {
+  for (let i = 0; i < wordLength; i++) {
+    if (word.includes(userGuess[i])) {
+      tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
+      key.classList.add('wrong-location');
     }
   }
 }
@@ -79,7 +81,14 @@ function letterCheck() {
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck() {
-
+  for (let i = 0; i < wordLength; i++) {
+    console.log(i);
+    if (word[i] === userGuess[i]) {
+      // if this condition true turn tile and keyboard key green and disable that key
+      tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
+      key.classList.add('correct');
+    }
+  }
 }
 
 // function sets data into local storage
@@ -137,11 +146,11 @@ function winOrLose() {
 
 function handleMouseClick(event) {
   if (event.target.matches('[data-key]')) { // if the click matches anything with the data-attribute data-key -EB
-    pressKey(event.target.dataset.key); // press the key! -EB
+    addLetter(event.target.dataset.key); // press the key! -EB
     return;
   }
   if (event.target.matches('[data-enter]')) { // data-enter is assigned to enter key so that when you press it it will invoke the userGuess -EB
-    userGuess();
+    guessAlert();
     return;
   }
   if (event.target.matches('[data-delete]')) { // data-delete is assigned to the delete key so that when you press it it will invoke the removeLetter function -EB
@@ -153,13 +162,15 @@ function handleMouseClick(event) {
 // places letter on board when user selects letter on keyboard.
 // DONE: Takes in selected letter from on screen keyboard, displays it on game board.
 // TODO: Test and fix. 
-function pressKey(key) {
+function addLetter(key) {
   let activeTile = getActiveTile(); // invoke get Active tile function below -EB
   if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength variable (5) then return -eb
-  let nextTile = guessGrid.querySelector(':not([data-letter'); // makes the next active tile be one without a data-type letter -EB
+  let nextTile = guessGrid.querySelector(':not([data-letter]'); // makes the next active tile be one without a data-type letter -EB
   nextTile.dataset.letter = key.toLowerCase(); // ensures letter types are read as lowercase to compare to our constructor words -EB
   nextTile.textContent = key; // Makes text content of the next tile match the key that was pressed, each key is assigned their own letter in HTML -EB
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
+  guess.push(key);
+  console.log(guess);
 }
 
 function getActiveTile() {
@@ -172,40 +183,34 @@ function getActiveTile() {
 function removeLetter() { // remove a letter from grid -EB
   let activeTile = getActiveTile(); // run function getactivetiles which changes grid state to active -EB
   let lastTile = activeTile[activeTile.length - 1]; // create variable for last tile, as the active times minus 1 - EB
+  let removedTile = guessGrid.querySelector(':not([data-letter]');
+
   if (lastTile === null) return; // if the last tile is null then return.
   lastTile.textContent = ''; // else make last tile text content blank -EB
   delete lastTile.dataset.state; // sets delete data state and letter
   delete lastTile.dataset.letter;
+  guess.pop();
 }
 
-// gets users guess from index.html and passes to the processing functions < triggered by user pressing enter or submit button on game board.
-// TODO: save users guess letters.
-// TODO: place all letters in a Array.
-// TODO: returns that guess variable for other functions to use.
-function userGuess() {
+
+function guessAlert() {
   let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
   if (activeTile.length !== wordLength) {
-    alert('Not Enough Letter!');
+    alert('Not Enough Letters!');
     shakeTile(activeTile);
     return;
-  } 
-  let guess = getActiveTile((function (word, tile) {
-    return word + tile.dataset.letter;
-  }, ''));
-  if (!wordsArr.includes(guess)) {
+  }
+  if (!Word.wordsArr.includes(guess)) {
     alert('Not in word list');
     shakeTile(activeTile);
     return;
   }
   // I'm iffy about if this will work, the idea is that it removes the event and then flips to active tiles, but I'm not sure which parameters to set -EB
-  document.removeEventListener('click', handleMouseClick);
-  activeTile.forEach(function (...parameters) {
-    flipTile(...parameters, guess);
-  });
 }
 
 // ------------- ANIMATIONS ------------
 
+// This only works once. needs work. 
 function shakeTile(tiles) {
   tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
     tile.classList.add('shake'); // shake is reference to CSS style -EB
@@ -214,7 +219,7 @@ function shakeTile(tiles) {
       function () {
         tile.classList.remove('shake');
       },
-      { once: true }
+      // { once: true }
     );
   });
 }
@@ -226,19 +231,21 @@ function flipTile(tile, index, array, guess) {
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
+
   let key = keyboard.querySelector(`[data-key='${letter}']`);
+
   tile.addEventListener(
     'transitionEnd',
     function () {
       tile.classList.remove('flip');
       if (wordSelector[index] === letter) {// using a variable that I haven't defined so this will need to change based on others code -EB
-        tile.dataset.state = 'correct';
+        tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
         key.classList.add('correct');
       } else if (wordSelector.includes(letter)) {
-        tile.dataset.state = 'wrong-location';
+        tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
         key.classList.add('wrong-location');
       } else {
-        tile.dataset.state = 'wrong';
+        tile.dataset.state = 'wrong'; // turns letter dark gray by adding CSS class
         key.classList.add('wrong');
       }
       if (index === array.length - 1) {

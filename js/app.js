@@ -2,6 +2,7 @@
 // app.js will hold the control flow for the game itself and make reference to constructors.js and functionality.js.
 
 // -------------- GLOBAL VARIABLES/IMPORTS -----------
+
 let wordLength = 5;
 let flipAnimationDuration = 500;
 let danceAnimationDuration = 500;
@@ -10,17 +11,13 @@ let danceAnimationDuration = 500;
 let keyboard = document.querySelector("[data-keyboard]");
 let alertContainer = document.querySelector("[data-alert-container]");
 
-
-
-
 // --------------- CONTROL FLOW ---------------
 
 // main game play function.
+
 function playGame() {
 
 }
-
-
 
 // -------------- FUNCTION CALLS --------------
 
