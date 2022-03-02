@@ -85,27 +85,118 @@ header {
 
 /* main styling */
 
-#team-container {
+
+#team {
+  background: linear-gradient( #92D0CC, #D09BC6);
+  color: black;
+  border-radius: 5px;
+  border-width: 10px;
+  border-color:#751163;
+  border-style: double;
+  padding: 20px;
+  margin: 20px;
   display: grid;
-  justify-content: center;
-  align-content: center;
-  flex-grow: 1;
-  grid-template-columns: repeat(2, 10em, 6em);
-  grid-template-rows: repeat(4, 15em);
-  gap: .25em;
-  margin-bottom: 1em;
+  grid-template-columns: 2fr,3fr;
+  grid-template-areas: "header header"
+  "content content"
 }
 
-#eden {
-  background-color: #eea7d0;
-  color:#0B0C10;
-  border-color: #70819B;
-  border-width: 5px;
-  border-radius: 5px;
-  border-style: groove;
-  font-size: 1.2rem;
-  padding: 20px;
+#team h2{
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #751163;
+  text-shadow: 2px 2px 3px #66FCF1
 }
+#team p{
+  grid-area: content;
+  width: auto;
+  height: min-content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  line-height: 50px;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+#eden {
+  /* background-color: #e299c294; */
+  background: linear-gradient(#D09BC6, #92D0CC);
+  color:#0B0C10;
+  border-color: #41ccd1;
+  border-width: 10px;
+  border-radius: 5px;
+  border-style: double;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "header header"
+  "img content"
+  "img content"
+  "img footer"
+}
+#eden h3{
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #751163;
+  text-shadow: 2px 2px 3px #66FCF1;
+}
+#eden img {
+  grid-area: img;
+  margin-left: 100px;
+  border-style: double;
+  border-radius: 10px;
+  border-width: 10px;
+}
+
+#eden p {
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  line-height: 50px;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 35px;
+  text-align: center;
+}
+
+#eden a {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  color: #751163;
+  text-shadow: 2px 2px 3px #307974;
+  margin-top: 20px;
+  font-size: 2rem;
+  padding: 10px;
+}
+
+#eden a:hover a:active, a:focus, a:visited{
+  text-decoration: none;
+  color: #e2badb;
+}
+
 
 
 /* footer */
