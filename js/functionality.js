@@ -2,6 +2,7 @@
 
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
+let keyboard = document.querySelector('[data-keyboard]');
 // This page will contain the functions for use within app.js.
 
 // ------------ FUNCTIONS ------------------
@@ -29,17 +30,18 @@ if (parsedResults) {
 }
 else {
   results = {
-    roundsPlayed: 20,
-    roundsWon: 10,
+    roundsPlayed: 0,
+    roundsWon: 0,
     winPercent: 0,
     currentStreak: 0,
     bestStreak: 0,
-    percentCalc: function () {
-      let percent = (parseInt(this.roundsWon) / parseInt(this.roundsPlayed)) * 100;
-      this.winPercent = percent;
-    },
   };
-  results.percentCalc();
+}
+
+//reassigns results.winPercent with proper value - would return null if this function was a method of results
+function percentCalc() {
+  let percent = (parseInt(results.roundsWon) / parseInt(results.roundsPlayed)) * 100;
+  results.winPercent = percent;
 }
 
 // DONE: generate a random number in relation to the length of the words array.
@@ -107,10 +109,10 @@ function setToLocalStorage() {
 function winOrLose() {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
-  h3Elem.textContent = currentWord;
+  h3Elem.textContent = 'word.word';
   endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
-  pElem.textContent = currentDesc;
+  pElem.textContent = 'word.desc';
   endGameAlert.appendChild(pElem);
   //increment roundsPlayed
   results.roundsPlayed++;
@@ -122,18 +124,22 @@ function winOrLose() {
   else {
     results.currentStreak = 0;
   }
+  percentCalc();
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
-    results.bestSteak = results.currentStreak;
+    results.bestStreak = results.currentStreak;
   }
   //play again button
   let playAgainButton = document.createElement('button');
   playAgainButton.textContent = 'Play Again';
   endGameAlert.appendChild(playAgainButton);
   //view results button
+  let aElem = document.createElement('a');
+  aElem.href = '/results.html';
   let resultsButton = document.createElement('button');
   resultsButton.textContent = 'Results';
-  endGameAlert.appendChild(resultsButton);
+  aElem.appendChild(resultsButton);
+  endGameAlert.appendChild(aElem);
 }
 
 // ------------ EVENT HANDLERS -------------
@@ -219,12 +225,14 @@ function shakeTile(tiles) {
 }
 
 //This function is going to need to be re-worked a LOT i think with other people's functions in mind but for now this is how my brains figured it out -EB
+/* Lines of code from this function I'll need but I need to figure out
 function flipTile(tile, index, array, guess) {
   let letter = tile.dataset.letter;
-  let key = keyboard.querySelector(`[data-key="${letter}"]`);
   setTimeout(function () {
     tile.classList.add('flip');
   }, (index * flipAnimationDuration) / 2);
+
+  let key = keyboard.querySelector(`[data-key='${letter}']`);
 
   tile.addEventListener(
     'transitionEnd',
@@ -254,7 +262,13 @@ function flipTile(tile, index, array, guess) {
     { once: true }
   );
 }
+*/
+
+function handlePlayAgain(){
+  playGame();
+}
 
 // -------------- EVENT LISTENERS ---------------
 
 document.addEventListener("click", handleMouseClick);
+document.addEventListener('click', handlePlayAgain);

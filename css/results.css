@@ -45,13 +45,25 @@ header {
   }
 
   a {
+    color: gainsboro;
     text-decoration: none;
   }
+  a:visited {
+    text-decoration: none;
+    color: rgb(159, 184, 218);
+  }
   a:hover {
-    background-color: rgb(250, 186, 223);
+    background-color: #92D0CC;
     color: black;
     padding: 3px;
     border-radius: 5px;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    text-decoration: none;
+  }
+  a:focus{
+   text-decoration: none;
  }
 
 /* main styling */
