@@ -254,6 +254,42 @@ main {
   margin-bottom: 30px;
   padding-bottom: 20px;
 }
+
+#rules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0B0C10;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  border-width: 10px;
+  border-style: double;
+  border-color: #66FCF1;
+  width: max-content;
+  padding: 20px;
+}
+#rules h3{
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 3px #66FCF1;
+  margin-bottom: 20px;
+}
+
+#rules ul{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#rules li {
+  padding: 7px;
+  font-size: 1.2rem;
+}
 /* footer Styling */
 .foot-left{
   display: flex;
