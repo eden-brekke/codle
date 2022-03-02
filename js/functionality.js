@@ -25,17 +25,18 @@ if (parsedResults) {
 }
 else {
   results = {
-    roundsPlayed: 20,
-    roundsWon: 10,
+    roundsPlayed: 0,
+    roundsWon: 0,
     winPercent: 0,
     currentStreak: 0,
     bestStreak: 0,
-    percentCalc: function() {
-      let percent = (parseInt(this.roundsWon) / parseInt(this.roundsPlayed)) * 100;
-      this.winPercent = percent;
-    },
   };
-  results.percentCalc();
+}
+
+//reassigns results.winPercent with proper value - would return null if this function was a method of results
+function percentCalc() {
+  let percent = (parseInt(results.roundsWon) / parseInt(results.roundsPlayed)) * 100;
+  results.winPercent = percent;
 }
 
 // DONE: generate a random number in relation to the length of the words array.
@@ -98,10 +99,10 @@ function setToLocalStorage() {
 function winOrLose() {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
-  h3Elem.textContent = currentWord;
+  h3Elem.textContent = 'word.word';
   endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
-  pElem.textContent = currentDesc;
+  pElem.textContent = 'word.desc';
   endGameAlert.appendChild(pElem);
   //increment roundsPlayed
   results.roundsPlayed++;
@@ -113,18 +114,22 @@ function winOrLose() {
   else {
     results.currentStreak = 0;
   }
+  percentCalc();
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
-    results.bestSteak = results.currentStreak;
+    results.bestStreak = results.currentStreak;
   }
   //play again button
   let playAgainButton = document.createElement('button');
   playAgainButton.textContent = 'Play Again';
   endGameAlert.appendChild(playAgainButton);
   //view results button
+  let aElem = document.createElement('a');
+  aElem.href = '/results.html';
   let resultsButton = document.createElement('button');
   resultsButton.textContent = 'Results';
-  endGameAlert.appendChild(resultsButton);
+  aElem.appendChild(resultsButton);
+  endGameAlert.appendChild(aElem);
 }
 
 // ------------ EVENT HANDLERS -------------
@@ -250,6 +255,11 @@ function flipTile(tile, index, array, guess) {
   );
 }
 
+function handlePlayAgain(){
+  playGame();
+}
+
 // -------------- EVENT LISTENERS ---------------
 
 document.addEventListener("click", handleMouseClick);
+document.addEventListener('click', handlePlayAgain);
