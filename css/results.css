@@ -83,13 +83,15 @@ nav {
     text-decoration: none;
   }
   a:focus{
-   text-decoration: none;
- }
+  text-decoration: none;
+}
 
 /* main styling */
 
 main {
   padding: 30px;
+  background-color: #132440;
+  height: 500px;
 }
 
 /* footer styling */
@@ -146,15 +148,17 @@ main {
 }
 
 main div {
-  border: double #92D0CC;
+
+  background-color: #0B0C10;
+  border-radius: 15px;
   padding: 1%;
   text-align: center;
   color: gainsboro;
-  text-shadow: 2px 2px 3px #66FCF1;
   font-weight: bold;
   height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-size: 1.5rem;
+  font-family: sans-serif;
 }
