@@ -9,7 +9,7 @@ function resultsDisplay(results) {
 
   let winPercentage = document.getElementById('win-percentage');
   let p1Elem = document.createElement('p');
-  p1Elem.textContent = `${results.winPercent}%`;
+  p1Elem.textContent = `${Math.floor(results.winPercent)}%`;
   winPercentage.appendChild(p1Elem);
 
   let currentWins = document.getElementById('win-streak');
