@@ -1,9 +1,14 @@
 /* Color Palette 
 Very Dark Blue: #0B0C10
-Grey Navy Blue: #1F2833 
+Dark Navy Blue: #132440
+Grey Navy Blue: #1F2833
+Light Grey Blue: #1B3B6F 
 Light Grey: #C5C6C7
+light Turquoise Grey: #92D0CC
 Turquoise: #66FCF1
-Muted Turquoise: #45A29E  */
+Muted Turquoise: #45A29E
+Wrong Location Pink: #C21BA3
+Light Pink: #D09BC6  */
 
 body {
   background-color: #0B0C10;
@@ -11,37 +16,52 @@ body {
 }
 
 /* header styling */
-header {
-  border-bottom: 1px solid rgb(58, 58, 60);
+nav {
+  position: relative;
+  padding-top:30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  
 }
 .title {
-   color: gainsboro;
-   font-size: 2.5rem;
-   font-weight: bold;
-   margin: 0.4rem 0 0.4rem 0;
-   text-align: center;
-   text-shadow: 2px 2px 3px #66FCF1;
- }
+  color: gainsboro;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 3px #66FCF1;
+}
 
- .menu-left {
-   display: flex;
-   margin: 0;
-   padding: 0;
-   align-items: center;
-   width: auto;
-   justify-content: flex-start;
-   color: gainsboro;
-   font-size: 1.5rem;
-   margin: 5px;
- }
- .menu-right {
-   display: flex;
-   width: auto;
-   justify-content: flex-end;
-   align-items: center;
-   font-size: 1.5rem;
-   margin: 5px;
-   color: gainsboro;
+.menu-left {
+  display: flex;
+  padding: 0;
+  width: auto;
+  justify-content: flex-start;
+  align-items: left;
+  color: gainsboro;
+  font-size: 1.5rem;
+  margin: 5px;
+  position: absolute;
+}
+
+.menu-right {
+    display: flex;
+    width: auto;
+    justify-content: right;
+    align-items: right;
+    font-size: 1.5rem;
+    margin: 5px;
+    color: gainsboro;
+    position: absolute;
+    top: 30px;
+    right: 10px;
   }
 
   a {
@@ -68,12 +88,23 @@ header {
 
 /* main styling */
 
-#team {
-  background-color: #70819B;
-  width: auto;
+main {
+  padding: 30px;
 }
 
 /* footer styling */
+footer {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
 .foot-left{
   display: flex;
   margin: 5px;
@@ -83,6 +114,8 @@ header {
   justify-content: flex-start;
   color: gainsboro;
   font-size: 1.2rem;
+  position: absolute;
+  top: 15px;
 }
 
 
@@ -102,4 +135,7 @@ header {
   justify-content: flex-end;
   font-size: 1.2rem;
   color: gainsboro;
+  position: absolute;
+  right: 10px;
+  top: 20px;
 }

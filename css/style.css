@@ -1,9 +1,14 @@
 /* Color Palette 
 Very Dark Blue: #0B0C10
-Grey Navy Blue: #1F2833 
+Dark Navy Blue: #132440
+Grey Navy Blue: #1F2833
+Light Grey Blue: #1B3B6F 
 Light Grey: #C5C6C7
+light Turquoise Grey: #92D0CC
 Turquoise: #66FCF1
-Muted Turquoise: #45A29E  */
+Muted Turquoise: #45A29E
+Wrong Location Pink: #C21BA3
+Light Pink: #D09BC6  */
 
 body {
   height: 100%;
@@ -15,6 +20,13 @@ body {
 
 header {
   border-bottom: 1px solid rgb(58, 58, 60);
+}
+nav {
+  position: relative;
+  padding-top:30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .title {
   color: gainsboro;
@@ -34,6 +46,7 @@ header {
   color: gainsboro;
   font-size: 1.5rem;
   margin: 5px;
+  position: absolute;
 }
 
 .menu-right {
@@ -44,6 +57,9 @@ header {
     font-size: 1.5rem;
     margin: 5px;
     color: gainsboro;
+    position: absolute;
+    top: 30px;
+    right: 10px;
   }
   
   a {
@@ -75,6 +91,13 @@ header {
   height: 100%;
   align-items: center;
   flex-direction: column;
+  border-bottom:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-top: 20px;
 }
 
 #game {
@@ -198,7 +221,7 @@ header {
   grid-auto-rows: 3em;
   gap: .25em;
   justify-content: center;
-  
+  padding-bottom: 20px;  
 }
 .key {
   font-size: inherit;
@@ -263,7 +286,8 @@ main {
   background-color: #0B0C10;
   margin-top: 50px;
   margin-bottom: 30px;
-  margin-left: 32%;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
   border-width: 10px;
   border-style: double;
@@ -292,6 +316,18 @@ main {
   font-size: 1.2rem;
 }
 /* footer Styling */
+footer {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
 .foot-left{
   display: flex;
   margin: 5px;
@@ -301,6 +337,8 @@ main {
   justify-content: flex-start;
   color: gainsboro;
   font-size: 1.2rem;
+  position: absolute;
+  top: 15px;
 }
 
 
@@ -320,4 +358,7 @@ main {
   justify-content: flex-end;
   font-size: 1.2rem;
   color: gainsboro;
+  position: absolute;
+  right: 10px;
+  top: 20px;
 }
