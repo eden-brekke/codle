@@ -66,9 +66,8 @@ function wordCheck(word, tile) { // works
       let tileLetter = tile[i].dataset.letter;
       // let tileArr = Array.from(tile);
       let key = document.querySelector(`[data-key='${tileLetter}']`);
-      console.log(tileArr);
-      tile[i].dataset.state = 'correct';
-      key.classList.add('correct');
+      tile[i].className = 'tile correct';
+      key.className = 'key correct';
     }
     won = true;
     return true;
@@ -86,8 +85,8 @@ function letterCheck(word, tile) {
     if (word.includes(userGuess[i])) {
       let tileLetter = tile[i].dataset.letter;
       let key = document.querySelector(`[data-key='${tileLetter}']`);
-      tile[i].dataset.state = 'wrong-location';
-      key.classList.add('wrong-location');
+      tile[i].className = 'tile wrong-location';
+      key.className = 'key wrong-location';
     }
   }
 }
@@ -102,11 +101,11 @@ function indexCheck(word, tile) {
     if (word[i] === userGuess[i]) {
       console.log('if');
       let tileLetter = tile[i].dataset.letter;
-      // let key = document.querySelector(`[data-key='${tileLetter}']`);
+      let key = document.querySelector(`[data-key='${tileLetter}']`);
       document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
-      delete tile[i].dataset.state;
-      tile[i].dataset.state = 'correct';
-      // key.classList.add('correct');
+      // delete tile[i].dataset.state;
+      tile[i].className = 'tile correct';
+      key.className = 'key correct';
     }
   }
 }
@@ -129,10 +128,10 @@ function setToLocalStorage() {
 function winOrLose(results, word) {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
-  h3Elem.textContent = 'word.word';
+  h3Elem.textContent = Word.word;
   endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
-  pElem.textContent = 'word.desc'; // Word.word.desc
+  pElem.textContent = Word.desc; // Word.word.desc
   endGameAlert.appendChild(pElem);
   //increment roundsPlayed
   results.roundsPlayed++;
@@ -184,7 +183,7 @@ function handleMouseClick(event) {
 // TODO: Test and fix. 
 function addLetter(key) {
   let activeTile = getActiveTile(); // invoke get Active tile function below -EB
-  if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength variable (5) then return -eb
+  // if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength variable (5) then return -eb
   let nextTile = guessGrid.querySelector(':not([data-letter]'); // makes the next active tile be one without a data-type letter -EB
   console.dir(nextTile);
   nextTile.dataset.letter = key.toLowerCase(); // ensures letter types are read as lowercase to compare to our constructor words -EB
@@ -241,50 +240,11 @@ function shakeTile(tiles) {
         tile.classList.remove('shake');
       },
       // { once: true }
-    );
+    ); // eslint-disable-line
   });
 }
 
 
-//This function is going to need to be re-worked a LOT i think with other people's functions in mind but for now this is how my brains figured it out -EB
-/* Lines of code from this function I'll need but I need to figure out
-function flipTile(tile, index, array, guess) {
-  let letter = tile.dataset.letter;
-  setTimeout(function () {
-    tile.classList.add('flip');
-  }, (index * flipAnimationDuration) / 2);
-
-  let key = keyboard.querySelector(`[data-key='${letter}']`);
-
-  tile.addEventListener(
-    'transitionEnd',
-    function () {
-      tile.classList.remove('flip');
-      if (wordSelector[index] === letter) {// using a variable that I haven't defined so this will need to change based on others code -EB
-        tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
-        key.classList.add('correct');
-      } else if (wordSelector.includes(letter)) {
-        tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
-        key.classList.add('wrong-location');
-      } else {
-        tile.dataset.state = 'wrong'; // turns letter dark gray by adding CSS class
-        key.classList.add('wrong');
-      }
-      if (index === array.length - 1) {
-        tile.addEventListener(
-          'transitionEnd',
-          function () {
-            handleMouseClick();
-            winOrLose(guess, array);
-          },
-          { once: true }
-        );
-      }
-    },
-    { once: true }
-  );
-}
-*/
 
 // function handlePlayAgain() {
 //   if ((event.target.matches('[data-enter]'))) {
@@ -338,6 +298,8 @@ function playGame() {
 
   // receive guess from user >> happens on user press of submit button.
   // check guess with wordCheck/letterCheck/indexCheck.
+  let tileCounter = 0;
+  let whileClose = 0;
 
   function enterClicked(event) {
     if ((event.target.matches('[data-enter]'))) {
@@ -346,11 +308,21 @@ function playGame() {
       } else {
         letterCheck(word, getActiveTile()); // return indexs in userguess that are in word
         indexCheck(word, getActiveTile());
-
       }
-    }
-  }
+      // lock row one from further edits <by removing active row ID>, and set next row as active row.
 
+      while (tileCounter <= whileClose) {
+        for (let i = 1; i < 6; i++) {
+          let rowDivs = document.getElementById(`tile${tileCounter + 1}`);
+          console.log(rowDivs);
+          delete rowDivs.dataset.state;
+          tileCounter++;
+        }
+      }
+      whileClose += 5;
+    }
+    // nextTile.dataset.state = 'active'; // we only need this if we need another data state for used rows. 
+  }
 
   document.addEventListener("click", enterClicked);
 
@@ -370,20 +342,3 @@ from app.js
 // End of app JS listeners ^^^
 
 document.addEventListener("click", handleMouseClick);
-// document.addEventListener('click', handlePlayAgain);
-
-//color
-// function colorChange(tile) {
-//   let letter = tile.dataset.letter;
-//   let key = keyboard.querySelection(`[data-key='${letter}'i]`);
-//   if (userGuess[i] === index) {
-//     tile.dataset.state = 'correct';
-//     key.classList.add('correct');
-//   } else if (userGuess.includes(letter)) {
-//     tile.dataset.state = 'wrong-location';
-//     key.classList.add('wrong-location');
-//   } else {
-//     tile.dataset.state = 'wrong';
-//     key.classList.add('wrong');
-//   }
-// }
