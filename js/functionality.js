@@ -110,7 +110,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     playAgainButton.textContent = 'Play Again';
     endGameAlert.appendChild(playAgainButton);
     let aElem = document.createElement('a');
-    aElem.href = '/results.html';
+    aElem.href = 'code-wordle/results.html';
     let resultsButton = document.createElement('button');
     resultsButton.textContent = 'Results';
     aElem.appendChild(resultsButton);
@@ -139,7 +139,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     indexElem.appendChild(playAgainButton);
     endGameAlert.appendChild(playAgainButton);
     let aElem = document.createElement('a');
-    aElem.href = '/results.html';
+    aElem.href = 'code-wordle/results.html';
     let resultsButton = document.createElement('button');
     resultsButton.textContent = 'Results';
     aElem.appendChild(resultsButton);
