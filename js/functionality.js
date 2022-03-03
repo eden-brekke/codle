@@ -87,7 +87,7 @@ function letterCheck(word, tile) {
       let key = document.querySelector(`[data-key='${tileLetter}']`);
       tile[i].className = 'tile wrong-location';
       key.className = 'key wrong-location';
-    }
+    } 
   }
 }
 
@@ -107,6 +107,8 @@ function indexCheck(word, tile) {
       tile[i].className = 'tile correct';
       key.className = 'key correct';
     }
+    // tile[i].classname = 'tile wrong';
+    // key.className = 'key wrong';
   }
 }
 
@@ -114,7 +116,7 @@ function indexCheck(word, tile) {
 // DONE: get data and stringify it.
 // DONE: setItem with key and value.
 // TODO: test functionality
-function setToLocalStorage() {
+function setToLocalStorage(results) {
   let storedResults = JSON.stringify(results);
   localStorage.setItem('storedResults', storedResults);
 }
@@ -139,11 +141,15 @@ function winOrLose(results, word) {
   if (won) {
     results.roundsWon++;
     results.currentStreak++;
+    percentCalc(results);
+    setToLocalStorage(results);
   }
   else {
     results.currentStreak = 0;
+    percentCalc(results);
+    setToLocalStorage(results);
   }
-  percentCalc(results);
+  
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestStreak = results.currentStreak;
@@ -339,6 +345,8 @@ function playGame() {
         }
       }
       whileClose += 5;
+      guess = [];
+      userGuess = '';
     }
     // nextTile.dataset.state = 'active'; // we only need this if we need another data state for used rows. 
   }
