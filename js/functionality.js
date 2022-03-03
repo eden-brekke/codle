@@ -2,6 +2,8 @@
 
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
+let keyboard = document.querySelector("[data-keyboard]");
+let alertContainer = document.querySelector("[data-alert-container]");
 
 // This page will contain the functions for use within app.js.
 
@@ -38,7 +40,7 @@ let endGameAlert = document.getElementById('alert-container');
 // }
 
 //reassigns results.winPercent with proper value - would return null if this function was a method of results
-function percentCalc() {
+function percentCalc(results) {
   let percent = (parseInt(results.roundsWon) / parseInt(results.roundsPlayed)) * 100;
   results.winPercent = percent;
 }
@@ -52,52 +54,58 @@ function randIndexGenerator() {
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
 function wordSelector() {
-  let word = Word.wordsArr[randIndexGenerator()].word;
-  //return word;
+  return Word.wordsArr[randIndexGenerator()].word;
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
 // DONE: get function to check that index and content of guess word === selected word
-function wordCheck() { // works
-  toString(userGuess);
-
-
+let won;
+function wordCheck(word, tile) { // works
   if (userGuess === word) {
-    console.log(word, ' this is the value of word')
-    console.log(userGuess, ' this this the value of userguess')
-
+    for (let i = 0; i < wordLength; i++) {
+      let tileLetter = tile[i].dataset.letter;
+      // let tileArr = Array.from(tile);
+      let key = document.querySelector(`[data-key='${tileLetter}']`);
+      console.log(tileArr);
+      tile[i].dataset.state = 'correct';
+      key.classList.add('correct');
+    }
+    won = true;
     return true;
   } else {
+    won = false;
     return false;
   }
 }
 
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
-function letterCheck() {
-  //let checkWord = toString(word.word);
-  // console.log(word);
+function letterCheck(word, tile) {
+  console.log(tile);
   for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
-      //tile.dataset.state = 'wrong-location'; // turns letter Yellow by adding CSS class
-      //key.classList.add('wrong-location');
-      // console.log(word);
-
-      // output is : returns the index of i, IF i index in userGuess is in word. 
-
+      let tileLetter = tile[i].dataset.letter;
+      let key = document.querySelector(`[data-key='${tileLetter}']`);
+      tile[i].dataset.state = 'wrong-location';
+      key.classList.add('wrong-location');
     }
   }
 }
 
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
-function indexCheck() {
+function indexCheck(word, tile) {
+  console.log('tile in indexCheck', tile);
   for (let i = 0; i < wordLength; i++) {
-
+    console.log(word[i]);
+    console.log(userGuess[i]);
     if (word[i] === userGuess[i]) {
-
-      // if this condition true turn tile and keyboard key green and disable that key
-      // tile.dataset.state = 'correct'; // turns letter Green by adding CSS class
+      console.log('if');
+      let tileLetter = tile[i].dataset.letter;
+      // let key = document.querySelector(`[data-key='${tileLetter}']`);
+      document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
+      delete tile[i].dataset.state;
+      tile[i].dataset.state = 'correct';
       // key.classList.add('correct');
     }
   }
@@ -118,7 +126,7 @@ function setToLocalStorage() {
 // DONE: should popup with play again or go to results page options.
 // DONE: on lose should reset currentStreak to zero
 // TODO: test functionality, iterate.
-function winOrLose() {
+function winOrLose(results, word) {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
   h3Elem.textContent = 'word.word';
@@ -129,14 +137,14 @@ function winOrLose() {
   //increment roundsPlayed
   results.roundsPlayed++;
   //increments roundsWon if the player won the round and set currentSteak to 0 if lost- need logic from check functions
-  if (wordCheck()) {
+  if (won) {
     results.roundsWon++;
     results.currentStreak++;
   }
   else {
     results.currentStreak = 0;
   }
-  percentCalc();
+  percentCalc(results);
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestStreak = results.currentStreak;
@@ -178,16 +186,16 @@ function addLetter(key) {
   let activeTile = getActiveTile(); // invoke get Active tile function below -EB
   if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength variable (5) then return -eb
   let nextTile = guessGrid.querySelector(':not([data-letter]'); // makes the next active tile be one without a data-type letter -EB
+  console.dir(nextTile);
   nextTile.dataset.letter = key.toLowerCase(); // ensures letter types are read as lowercase to compare to our constructor words -EB
   nextTile.textContent = key; // Makes text content of the next tile match the key that was pressed, each key is assigned their own letter in HTML -EB
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
   guess.push(key);
-  console.log(guess);
   userGuess = guess.join('');
 }
 
 function getActiveTile() {
-  return guessGrid.querySelectorAll('[data-state="active"]'); // grab the guessing grid from index.html and set all their data-states to active -EB
+  return [...guessGrid.querySelectorAll('[data-state="active"]')]; // grab the guessing grid from index.html and set all their data-states to active -EB
 }
 
 // removes letter from board when user pressed delete button on keyboard.
@@ -196,6 +204,7 @@ function getActiveTile() {
 function removeLetter() { // remove a letter from grid -EB
   let activeTile = getActiveTile(); // run function getactivetiles which changes grid state to active -EB
   let lastTile = activeTile[activeTile.length - 1]; // create variable for last tile, as the active times minus 1 - EB
+  console.dir(lastTile);
   let removedTile = guessGrid.querySelector(':not([data-letter]');
 
   if (lastTile === null) return; // if the last tile is null then return.
@@ -208,13 +217,13 @@ function removeLetter() { // remove a letter from grid -EB
 
 function guessAlert() {
   let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
-  if (activeTile.length !== wordLength) {
-    alert('Not Enough Letters!');
+  if (userGuess !== wordLength) {
+    // alert('Not Enough Letters!');
     shakeTile(activeTile);
     return;
   }
-  if (!Word.wordsArr.includes(guess)) {
-    alert('Not in word list');
+  if (!Word.wordsArr.includes(userGuess)) {
+    // alert('Not in word list');
     shakeTile(activeTile);
     return;
   }
@@ -309,7 +318,6 @@ function playGame() {
   let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
   let results;
   let attempts = 0
-
   // if localStorage results exist load, else create results.
   if (parsedResults) {
     results = parsedResults;
@@ -322,21 +330,22 @@ function playGame() {
       bestStreak: 0,
     };
   }
+  console.log(results.roundsPlayed);
 
   // gameplay begins
-  let word = '';
-  // word = wordSelector(); // getting  word for play.
+  let word = wordSelector();
+  console.log(word);
 
   // receive guess from user >> happens on user press of submit button.
   // check guess with wordCheck/letterCheck/indexCheck.
 
-  function enterClicked() {
+  function enterClicked(event) {
     if ((event.target.matches('[data-enter]'))) {
-      if (wordCheck() === true) {
-        winOrLose();
+      if (wordCheck(word, getActiveTile())) {
+        winOrLose(results, word);
       } else {
-        letterCheck(); // return indexs in userguess that are in word
-        indexCheck();
+        letterCheck(word, getActiveTile()); // return indexs in userguess that are in word
+        indexCheck(word, getActiveTile());
 
       }
     }
@@ -362,3 +371,19 @@ from app.js
 
 document.addEventListener("click", handleMouseClick);
 // document.addEventListener('click', handlePlayAgain);
+
+//color
+// function colorChange(tile) {
+//   let letter = tile.dataset.letter;
+//   let key = keyboard.querySelection(`[data-key='${letter}'i]`);
+//   if (userGuess[i] === index) {
+//     tile.dataset.state = 'correct';
+//     key.classList.add('correct');
+//   } else if (userGuess.includes(letter)) {
+//     tile.dataset.state = 'wrong-location';
+//     key.classList.add('wrong-location');
+//   } else {
+//     tile.dataset.state = 'wrong';
+//     key.classList.add('wrong');
+//   }
+// }
