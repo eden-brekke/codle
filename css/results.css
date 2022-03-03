@@ -139,3 +139,22 @@ footer {
   right: 10px;
   top: 20px;
 }
+
+main {
+  display: flex;
+  justify-content: space-between;
+}
+
+main div {
+  border: double #92D0CC;
+  padding: 1%;
+  text-align: center;
+  color: gainsboro;
+  text-shadow: 2px 2px 3px #66FCF1;
+  font-weight: bold;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 1.5rem;
+}
