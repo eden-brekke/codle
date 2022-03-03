@@ -53,13 +53,16 @@ function randIndexGenerator() {
 
 // this function will call randIndexGenerator and use return to get word for round of play.
 // DONE: get function to return a word for game play.
+let wordIndex = 0; 
 function wordSelector() {
-  return Word.wordsArr[randIndexGenerator()].word;
+  wordIndex = randIndexGenerator();
+  return Word.wordsArr[wordIndex].word;
 }
 
 // this function checks if the users word EXACTLY matches the selected word.
 // DONE: get function to check that index and content of guess word === selected word
 let won;
+let lose;
 function wordCheck(word, tile) { // works
   if (userGuess === word) {
     for (let i = 0; i < wordLength; i++) {
@@ -82,7 +85,6 @@ function wordCheck(word, tile) { // works
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
 function letterCheck(word, tile) {
-  console.log(tile);
   for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
       let tileLetter = tile[i].dataset.letter;
@@ -96,12 +98,8 @@ function letterCheck(word, tile) {
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck(word, tile) {
-  console.log('tile in indexCheck', tile);
   for (let i = 0; i < wordLength; i++) {
-    console.log(word[i]);
-    console.log(userGuess[i]);
     if (word[i] === userGuess[i]) {
-      console.log('if');
       let tileLetter = tile[i].dataset.letter;
       let key = document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
       // delete tile[i].dataset.state;
@@ -131,13 +129,13 @@ function setToLocalStorage(results) {
 // DONE: should popup with play again or go to results page options.
 // DONE: on lose should reset currentStreak to zero
 // TODO: test functionality, iterate.
-function winOrLose(results, word) {
+function winOrLose(results, word, attempts, wordIndex, wordsArr) {
   //display word and description - need logic from wordSelector() for currentWord and currentDesc
   let h3Elem = document.createElement('h3');
-  h3Elem.textContent = Word.word;
+  h3Elem.textContent = word;
   endGameAlert.appendChild(h3Elem);
   let pElem = document.createElement('p');
-  pElem.textContent = Word.desc; // Word.word.desc
+  pElem.textContent = Word.wordsArr[wordIndex].desc; // Word.word.desc
   endGameAlert.appendChild(pElem);
   //increment roundsPlayed
   results.roundsPlayed++;
@@ -147,29 +145,40 @@ function winOrLose(results, word) {
     results.currentStreak++;
     percentCalc(results);
     setToLocalStorage(results);
+    //play again button
+    let playAgainButton = document.createElement('button');
+    playAgainButton.textContent = 'Play Again';
+    endGameAlert.appendChild(playAgainButton);
+    //view results button
+    let aElem = document.createElement('a');
+    aElem.href = '/results.html';
+    let resultsButton = document.createElement('button');
+    resultsButton.textContent = 'Results';
+    aElem.appendChild(resultsButton);
+    endGameAlert.appendChild(aElem);
   }
-  else {
+  else if (attempts === 6) {
     results.currentStreak = 0;
     percentCalc(results);
     setToLocalStorage(results);
+    //play again button
+    let playAgainButton = document.createElement('button');
+    playAgainButton.textContent = 'Play Again';
+    endGameAlert.appendChild(playAgainButton);
+    //view results button
+    let aElem = document.createElement('a');
+    aElem.href = '/results.html';
+    let resultsButton = document.createElement('button');
+    resultsButton.textContent = 'Results';
+    aElem.appendChild(resultsButton);
+    endGameAlert.appendChild(aElem);
   }
-
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestStreak = results.currentStreak;
   }
-  //play again button
-  let playAgainButton = document.createElement('button');
-  playAgainButton.textContent = 'Play Again';
-  endGameAlert.appendChild(playAgainButton);
-  //view results button
-  let aElem = document.createElement('a');
-  aElem.href = '/results.html';
-  let resultsButton = document.createElement('button');
-  resultsButton.textContent = 'Results';
-  aElem.appendChild(resultsButton);
-  endGameAlert.appendChild(aElem);
 }
+
 
 function resultsDisplay(results) {
   let totalRounds = document.getElementById('rounds-played');
@@ -192,6 +201,7 @@ function resultsDisplay(results) {
   p3Elem.textContent = results.bestStreak;
   bestWins.appendChild(p3Elem);
 }
+
 
 // ------------ EVENT HANDLERS -------------
 
@@ -216,7 +226,7 @@ function addLetter(key) {
   let activeTile = getActiveTile(); // invoke get Active tile function below -EB
   // if (activeTile.length >= wordLength) return; // if the amount of active tiles is greater than the wordLength variable (5) then return -eb
   let nextTile = guessGrid.querySelector(':not([data-letter]'); // makes the next active tile be one without a data-type letter -EB
-  console.dir(nextTile);
+  // console.dir(nextTile);
   nextTile.dataset.letter = key.toLowerCase(); // ensures letter types are read as lowercase to compare to our constructor words -EB
   nextTile.textContent = key; // Makes text content of the next tile match the key that was pressed, each key is assigned their own letter in HTML -EB
   nextTile.dataset.state = 'active'; // changes data-state to active this should help work with changing the letters colors later. -EB
@@ -234,7 +244,7 @@ function getActiveTile() {
 function removeLetter() { // remove a letter from grid -EB
   let activeTile = getActiveTile(); // run function getactivetiles which changes grid state to active -EB
   let lastTile = activeTile[activeTile.length - 1]; // create variable for last tile, as the active times minus 1 - EB
-  console.dir(lastTile);
+  // console.dir(lastTile);
   let removedTile = guessGrid.querySelector(':not([data-letter]');
 
   if (lastTile === null) return; // if the last tile is null then return.
@@ -243,8 +253,6 @@ function removeLetter() { // remove a letter from grid -EB
   delete lastTile.dataset.letter;
   guess.pop();
 }
-
-
 
 
 // ------------- ANIMATIONS ------------
@@ -293,18 +301,12 @@ function flipTile(tiles) {
   });
 }
 
-// function handlePlayAgain() {
-//   if ((event.target.matches('[data-enter]'))) {
-//     playGame();
-//   }
-// }
 
-
-/*
- 
-Everything bellow here is from app.js for testing
- 
-*/
+function handlePlayAgain() {
+  if ((event.target.matches('[data-enter]'))) {
+    playGame();
+  }
+}
 
 
 // --------------- CONTROL FLOW ---------------
@@ -318,13 +320,11 @@ let flipAnimationDuration = 500;
 let danceAnimationDuration = 500;
 
 
-
-function playGame() {
+function playGame(wordsArr) {
 
   // checking local storage for past results.
   let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
   let results;
-  let attempts = 0
   // if localStorage results exist load, else create results.
   if (parsedResults) {
     results = parsedResults;
@@ -337,7 +337,6 @@ function playGame() {
       bestStreak: 0,
     };
   }
-  console.log(results.roundsPlayed);
 
   // gameplay begins
   let word = wordSelector();
@@ -347,11 +346,13 @@ function playGame() {
   // check guess with wordCheck/letterCheck/indexCheck.
   let tileCounter = 0;
   let whileClose = 0;
+  let attempts = 0;
 
   function enterClicked(event) {
+
     if ((event.target.matches('[data-enter]'))) {
       if (wordCheck(word, getActiveTile())) {
-        winOrLose(results, word);
+        winOrLose(results, word, attempts, wordIndex, wordsArr);
       } else {
         letterCheck(word, getActiveTile()); // return indexs in userguess that are in word
         indexCheck(word, getActiveTile());
@@ -361,7 +362,6 @@ function playGame() {
       while (tileCounter <= whileClose) {
         for (let i = 1; i < 6; i++) {
           let rowDivs = document.getElementById(`tile${tileCounter + 1}`);
-          console.log(rowDivs);
           delete rowDivs.dataset.state;
           tileCounter++;
         }
@@ -369,6 +369,10 @@ function playGame() {
       whileClose += 5;
       guess = [];
       userGuess = '';
+      attempts++;
+      if (attempts === 6) {
+        winOrLose(results, word, attempts, wordIndex, wordsArr);
+      }
     }
     // nextTile.dataset.state = 'active'; // we only need this if we need another data state for used rows. 
   }
@@ -381,13 +385,8 @@ playGame();
 
 // -------------- EVENT LISTENERS ---------------
 
-/*
- 
-from app.js
- 
-*/
-
 
 // End of app JS listeners ^^^
 
 document.addEventListener("click", handleMouseClick);
+alertContainer.addEventListener("submit", handlePlayAgain)
