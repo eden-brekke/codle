@@ -22,6 +22,17 @@ function percentCalc(results) {
   results.winPercent = percent;
 }
 
+
+function bestStreakCalc(results) {
+  let best = parseInt(results.bestStreak);
+  let current = parseInt(results.currentStreak);
+  if(best < current) {
+    results.bestStreak = current;
+  }
+}
+
+
+
 function randIndexGenerator() {
   let randIndex = Math.floor(Math.random() * Word.wordsArr.length);
   return randIndex;
@@ -94,6 +105,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     results.roundsWon++;
     results.currentStreak++;
     percentCalc(results);
+    bestStreakCalc(results);
     setToLocalStorage(results);
     let playAgainButton = document.createElement('button');
     playAgainButton.setAttribute('type', 'submit');
@@ -118,6 +130,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     endGameAlert.appendChild(pElem);
     results.currentStreak = 0;
     percentCalc(results);
+    bestStreakCalc();
     setToLocalStorage(results);
     let indexElem = document.createElement('a');
     indexElem.href = '/index.html';
@@ -133,33 +146,8 @@ function winOrLose(results, word, attempts, wordIndex) {
     aElem.appendChild(resultsButton);
     endGameAlert.appendChild(aElem);
   }
-  if (results.currentStreak > results.bestStreak) {
-    results.bestStreak = results.currentStreak;
-  }
 }
 
-
-function resultsDisplay(results) {
-  let totalRounds = document.getElementById('rounds-played');
-  let pElem = document.createElement('p');
-  pElem.textContent = results.roundsPlayed;
-  totalRounds.appendChild(pElem);
-
-  let winPercentage = document.getElementById('win-percentage');
-  let p1Elem = document.createElement('p');
-  p1Elem.textContent = results.winPercent;
-  winPercentage.appendChild(p1Elem);
-
-  let currentWins = document.getElementById('win-streak');
-  let p2Elem = document.createElement('p');
-  p2Elem.textContent = results.currentStreak;
-  currentWins.appendChild(p2Elem);
-
-  let bestWins = document.getElementById('best-win-streak');
-  let p3Elem = document.createElement('p');
-  p3Elem.textContent = results.bestStreak;
-  bestWins.appendChild(p3Elem);
-}
 
 
 // ------------ EVENT HANDLERS -------------
@@ -327,4 +315,7 @@ document.addEventListener('click', handleMouseClick);
 //   // playGame();
 // }
 
+
 // endGameAlert.addEventListener('submit', handlePlayAgain);
+
+document.addEventListener("click", handleMouseClick);
