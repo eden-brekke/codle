@@ -343,3 +343,77 @@ footer {
   padding: 10px;
 
 }
+
+
+/* taneshas styling starts here! */
+#tay {
+  position: relative;
+  background: linear-gradient(#92bb99, #b5d1b4);
+  color:#0B0C10;
+  border-color: #5d856c;
+  border-width: 10px;
+  border-radius: 5px;
+  border-style: double;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "header header"
+  "img content"
+  "img content"
+  "img footer"
+}
+#tay h3{
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #466146;
+  text-shadow: 2px 2px 3px #84a189;
+}
+#tay img {
+  grid-area: img;
+  border-style: double;
+  border-radius: 10px;
+  border-width: 8px;
+  float: left;
+  width: 500px
+}
+
+#tay p {
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  line-height: 50px;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  float:right;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+}
+
+#tay a {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  color: #546d54;
+  text-shadow: 2px 2px 3px #9ab99c;
+  margin-top: 20px;
+  font-size: 2rem;
+  padding: 10px;
+}
+
+#tay a:hover a:active, a:focus, a:visited{
+  text-decoration: none;
+  color: #678b69;
+}
+
+/* taneshas styling ends here! */
