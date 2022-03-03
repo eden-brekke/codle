@@ -70,9 +70,11 @@ function wordCheck(word, tile) { // works
       key.className = 'key correct';
     }
     won = true;
+    danceTile(tile);
     return true;
   } else {
     won = false;
+    shakeTile(tile);
     return false;
   }
 }
@@ -87,7 +89,7 @@ function letterCheck(word, tile) {
       let key = document.querySelector(`[data-key='${tileLetter}']`);
       tile[i].className = 'tile wrong-location';
       key.className = 'key wrong-location';
-    } 
+    }
   }
 }
 
@@ -101,14 +103,16 @@ function indexCheck(word, tile) {
     if (word[i] === userGuess[i]) {
       console.log('if');
       let tileLetter = tile[i].dataset.letter;
-      let key = document.querySelector(`[data-key='${tileLetter}']`);
-      document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
+      let key = document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
       // delete tile[i].dataset.state;
       tile[i].className = 'tile correct';
       key.className = 'key correct';
+    // } else if(word[i] !== userGuess[i]) {
+    //   let tileLetter = tile[i].dataset.letter;
+    //   let key = document.querySelector(`:not([data-key=${tileLetter}]`).className = 'wrong';
+    //   tile[i].className = 'tile wrong shake';
+    //   key.className = 'key wrong';
     }
-    // tile[i].classname = 'tile wrong';
-    // key.className = 'key wrong';
   }
 }
 
@@ -149,7 +153,7 @@ function winOrLose(results, word) {
     percentCalc(results);
     setToLocalStorage(results);
   }
-  
+
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestStreak = results.currentStreak;
@@ -197,7 +201,6 @@ function handleMouseClick(event) {
     return;
   }
   if (event.target.matches('[data-enter]')) { // data-enter is assigned to enter key so that when you press it it will invoke the userGuess -EB
-    guessAlert();
     return;
   }
   if (event.target.matches('[data-delete]')) { // data-delete is assigned to the delete key so that when you press it it will invoke the removeLetter function -EB
@@ -242,54 +245,51 @@ function removeLetter() { // remove a letter from grid -EB
 }
 
 
-function guessAlert() {
-  let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
-  if (userGuess !== wordLength) {
-    // alert('Not Enough Letters!');
-    shakeTile(activeTile);
-    return;
-  }
-  if (!Word.wordsArr.includes(userGuess)) {
-    // alert('Not in word list');
-    shakeTile(activeTile);
-    return;
-  }
-}
+
 
 // ------------- ANIMATIONS ------------
 
-// This only works once. needs work. 
-// function shakeTile(tiles) {
-//   tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
-//     tile.classList.add('shake'); // shake is reference to CSS style -EB
-//     tile.addEventListener(
-//       'animationEnd',
-//       function () {
-//         tile.classList.remove('shake');
-//       },
-//       // { once: true }
-//     ); // eslint-disable-line
-//   });
-// }
-
-//####################### I need these to be tested ##########
 function shakeTile(tiles) {
   tiles.forEach(function (tile) {
-    tile.classList.remove('shake');
     tile.classList.add('shake');
+    tile.addEventListener(
+      'animationEnd',
+      function () {
+        tile.className = 'tile';
+      },
+      { once: true }
+    );
   });
 }
 
-//I have variables for flip tile and dancing tile animations durations, I need to figure out where we need to input those
+
 function danceTile(tiles) {
-  tiles.forEach(function (tile) {
-    tile.classList.add('dance');
+  tiles.forEach(function (tile, index) {
+    setTimeout(function () {
+      tile.className = 'tile dance correct';
+      tile.addEventListener(
+        'animationEnd',
+        function () {
+          tile.className = 'tile';
+        },
+        { once: true }
+      );
+    }, (index * danceAnimationDuration) / 5);
   });
 }
 
 function flipTile(tiles) {
-  tiles.forEach(function (tile) {
-    tile.classList.add('flip');
+  tiles.forEach(function (tile, index) {
+    setTimeout(function () {
+      tile.className = 'tile flip';
+      tile.addEventListener(
+        'animationEnd',
+        function () {
+          tile.className = 'tile';
+        },
+        { once: true }
+      );
+    }, (index * flipAnimationDuration) / 5);
   });
 }
 
@@ -301,9 +301,9 @@ function flipTile(tiles) {
 
 
 /*
-
+ 
 Everything bellow here is from app.js for testing
-
+ 
 */
 
 
@@ -382,9 +382,9 @@ playGame();
 // -------------- EVENT LISTENERS ---------------
 
 /*
-
+ 
 from app.js
-
+ 
 */
 
 
