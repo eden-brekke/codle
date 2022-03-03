@@ -75,6 +75,7 @@ function wordCheck(word, tile) { // works
     return true;
   } else {
     won = false;
+    shakeTile(tile);
     return false;
   }
 }
@@ -177,7 +178,7 @@ function handleMouseClick(event) {
     return;
   }
   if (event.target.matches('[data-enter]')) { // data-enter is assigned to enter key so that when you press it it will invoke the userGuess -EB
-    guessAlert();
+    // guessAlert();
     return;
   }
   if (event.target.matches('[data-delete]')) { // data-delete is assigned to the delete key so that when you press it it will invoke the removeLetter function -EB
