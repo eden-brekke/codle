@@ -1,0 +1,494 @@
+/* Color Palette 
+Very Dark Blue: #0B0C10
+Dark Navy Blue: #132440
+Grey Navy Blue: #1F2833
+Light Grey Blue: #1B3B6F 
+Light Grey: #C5C6C7
+light Turquoise Grey: #92D0CC
+Turquoise: #66FCF1
+Muted Turquoise: #45A29E
+Wrong Location Pink: #C21BA3
+Light Pink: #D09BC6  */
+
+body {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+}
+
+/* header styling */
+
+header {
+  margin-bottom: 10px;
+}
+
+nav {
+  position: relative;
+  padding-top:30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;  
+}
+
+.title {
+  color: gainsboro;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 3px #66FCF1;
+}
+
+.menu-left {
+  display: flex;
+  padding: 0;
+  width: auto;
+  justify-content: flex-start;
+  align-items: left;
+  color: gainsboro;
+  font-size: 1.5rem;
+  margin: 5px;
+  position: absolute;
+}
+
+.menu-right {
+    display: flex;
+    width: auto;
+    justify-content: right;
+    align-items: right;
+    font-size: 1.5rem;
+    margin: 5px;
+    color: gainsboro;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+  }
+
+
+#toc {
+  margin-top: 10px;
+}
+
+#toc li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 3px;
+  font-size: 1.2rem;
+  color: #70819B;
+}
+
+/* main styling */
+
+
+#team {
+  background: linear-gradient( #92D0CC, #D09BC6);
+  color: black;
+  border-radius: 5px;
+  border-width: 10px;
+  border-color:#751163;
+  border-style: double;
+  padding: 20px;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: 2fr,3fr;
+  grid-template-areas: "header header"
+  "content content"
+}
+
+#team-container {
+  display: grid;
+}
+
+#team h2{
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #751163;
+  text-shadow: 2px 2px 3px #66FCF1
+}
+#team p{
+  grid-area: content;
+  width: auto;
+  height: min-content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  line-height: 50px;
+  font-size: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Eden's styling is bellow this line. */
+
+#eden {
+  position: relative;
+  background: linear-gradient(#D09BC6, #92D0CC);
+  color:#0B0C10;
+  border-color: #41ccd1;
+  border-width: 10px;
+  border-radius: 5px;
+  border-style: double;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "header header"
+  "img content"
+  "img content"
+  "img footer"
+}
+#eden h3{
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3.5rem;
+  color: #570c49;
+  /* text-shadow: 2px 2px 3px #66FCF1; */
+}
+#eden img {
+  grid-area: img;
+  border-style: double;
+  border-radius: 10px;
+  border-width: 10px;
+  float: left;
+}
+
+#eden p {
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  line-height: 50px;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  float:right;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: left;
+}
+
+#eden a {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  color: #751163;
+  text-shadow: 2px 2px 3px #307974;
+  margin-top: 20px;
+  font-size: 2rem;
+  padding: 10px;
+}
+
+#eden a:hover a:active, a:focus, a:visited{
+  text-decoration: none;
+  color: #e2badb;
+}
+
+/* Eden's styling ends here. */
+
+/* footer */
+footer {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.foot-left{
+  display: flex;
+  margin: 5px;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-start;
+  color: gainsboro;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 15px;
+}
+
+
+.foot-mid {
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+}
+
+.foot-right{
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  color: gainsboro;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+}
+
+/*  Ben styling */
+
+#ben {
+  position: relative;
+  background: #1b3b6f;
+  color:#0B0C10;
+  margin-left: 25px;
+  margin-right: 25px;
+  border-radius: 25px;
+  border-style: double;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "header header"
+  "img content"
+  "img content"
+  "img footer"
+}
+
+#ben h3 {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #C5C6C7;
+  font-family: sans-serif;
+
+}
+
+#ben img {
+  width: 530px;
+  grid-area: img;
+  border-radius: 30px;
+  float: left;
+}
+
+#ben p {
+  background: #70819B;
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  font-family: sans-serif;
+  border-width: 10px;
+  border-radius: 15px;
+  line-height: 50px;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  float: right;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: left;
+}
+
+#ben a {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  color: #C5C6C7;
+  font-family: sans-serif;
+  text-shadow: 2px 2px 3px #307974;
+  margin-top: 20px;
+  font-size: 2rem;
+  padding: 10px;
+
+}
+
+#cole {
+  position: relative;
+  background: #1b3b6f;
+  color:#0B0C10;
+  margin-left: 25px;
+  margin-right: 25px;
+  border-radius: 25px;
+  border-style: double;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "header header"
+  "img content"
+  "img content"
+  "img footer"
+}
+
+#cole h3 {
+  grid-area: header;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #C5C6C7;
+  font-family: sans-serif;
+}
+
+
+#cole img {
+  width: 530px;
+  grid-area: img;
+  border-radius: 30px;
+  float: left;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+#cole p {
+  background: #032558;
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  font-family: sans-serif;
+  border-width: 10px;
+  border-radius: 15px;
+  line-height: 50px;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+    /* float: right; */
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 50px;
+  margin-right: 20px;
+  text-align: left;
+}
+  
+#cole a {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  color: #C5C6C7;
+  font-family: sans-serif;
+  text-shadow: 2px 2px 3px #307974;
+  margin-top: 10px;
+  font-size: 2rem;
+  padding: 10px;
+}
+
+  
+/* taneshas styling starts here! */
+#tay {
+  position: relative;
+  background: linear-gradient(#92bb99, #b5d1b4);
+  color:#0B0C10;
+  border-color: #5d856c;
+  border-width: 10px;
+  border-radius: 5px;
+  border-style: double;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-areas: "header header"
+  "img content"
+  "img content"
+  "img footer"
+}
+
+#tay h3{
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  font-size: 3rem;
+  color: #466146;
+  text-shadow: 2px 2px 3px #84a189;
+}
+#tay img {
+  grid-area: img;
+  border-style: double;
+  border-radius: 10px;
+  border-width: 8px;
+  float: left;
+  width: 500px
+}
+
+#tay p {
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  float:right;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+}
+
+#tay p {
+  width: auto;
+  height: min-content;
+  grid-area: content;
+  border: double;
+  border-width: 10px;
+  border-radius: 5px;
+  line-height: 50px;
+  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  float:right;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+}
+
+#tay a:hover a:active, a:focus, a:visited{
+  text-decoration: none;
+  color: #678b69;
+}
+
+/* taneshas styling ends here! */
+
+a {
+  color: gainsboro;
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+  color: rgb(159, 184, 218);
+}
+a:hover {
+  background-color: #92D0CC;
+  color: black;
+  padding: 3px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+a:hover, a:active {
+  text-decoration: none;
+}
+a:focus{
+  text-decoration: none;
+}

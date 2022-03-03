@@ -1,0 +1,404 @@
+/* Color Palette 
+Very Dark Blue: #0B0C10
+Dark Navy Blue: #132440
+Grey Navy Blue: #1F2833
+Light Grey Blue: #1B3B6F 
+Light Grey: #C5C6C7
+light Turquoise Grey: #92D0CC
+Turquoise: #66FCF1
+Muted Turquoise: #45A29E
+Wrong Location Pink: #C21BA3
+Light Pink: #D09BC6  */
+
+body {
+  height: 100%;
+  background-color: #0B0C10;
+  color: #C5C6C7;
+}
+
+/* header styling */
+
+header {
+  border-bottom: 1px solid rgb(58, 58, 60);
+}
+nav {
+  position: relative;
+  padding-top:30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.title {
+  color: gainsboro;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 3px #66FCF1;
+}
+
+.menu-left {
+  display: flex;
+  padding: 0;
+  width: auto;
+  justify-content: flex-start;
+  align-items: left;
+  color: gainsboro;
+  font-size: 1.5rem;
+  margin: 5px;
+  position: absolute;
+}
+
+.menu-right {
+    display: flex;
+    width: auto;
+    justify-content: right;
+    align-items: right;
+    font-size: 1.5rem;
+    margin: 5px;
+    color: gainsboro;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+  }
+  
+  a {
+    color: gainsboro;
+    text-decoration: none;
+  }
+  a:visited {
+    text-decoration: none;
+    color: rgb(159, 184, 218);
+  }
+  a:hover {
+    background-color: #92D0CC;
+    color: black;
+    padding: 3px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    text-decoration: none;
+  }
+  a:focus{
+    text-decoration: none;
+}
+
+/* Main styling */
+#container {
+  display: flex;
+  background-color: black;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+  border-bottom:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-top: 20px;
+}
+
+#game {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* alert container */
+
+#alert-container.popup {
+  position: absolute;
+  background-color: rgb(146, 208, 204, .85);
+  color: black;
+  top: 90px;
+  width: 200px;
+  padding: 60px;
+  border-radius: 10px;
+  left: 90px;
+}
+
+#alert-container.popup h3 {
+  font-size: xxx-large;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: 500;
+  padding-bottom: 15px;
+}
+
+#alert-container.popup p {
+  font-family: sans-serif;
+  font-size: 14pt;
+  text-align: center;
+}
+
+#alert-container.popup button {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#alert-container.popup a {
+  padding-left: 12px;
+}
+
+/* guess tile styling */
+
+.guess-grid {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  flex-grow: 1;
+  grid-template-columns: repeat(5, 4em);
+  grid-template-rows: repeat(6, 4em);
+  gap: .25em;
+  margin-bottom: 1em;
+}
+
+.tile {
+  font-size: 2em;
+  color: white;
+  border: .05em solid #45A29E;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  border-radius: 5px;
+  transition: transform 250ms linear;
+}
+/* working on tile color changes, there's JS to this that I need to figure out */
+.tile[data-state="active"]{
+  border-color:#92D0CC;
+}
+
+.tile.wrong {
+  border: none;
+  background-color: #747475;
+  border-radius: 5px;
+}
+
+.tile.correct {
+  border: none;
+  background-color: #92D0CC;
+  color:#0B0C10;
+  border-radius: 5px;
+}
+
+.tile.wrong-location {
+  border:none;
+  background-color: #C21BA3;
+  color:#0B0C10;
+  border-radius: 5px;
+}
+
+/* animation workings, there's JS to this that I need to figure out  */
+/* for correct word */
+.tile.dance {
+  animation: dance 500ms ease-in-out;
+}
+
+@keyframes dance {
+  20% {
+    transform: translateY(-50%);
+  }  
+  40% {
+    transform: translateY(5%);
+  }  
+  60% {
+    transform: translateY(-25%);
+  }  
+  80% {
+    transform: translateY(2.5%);
+  }  
+  90% {
+    transform: translateY(-5%);
+  }  
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* for wrong word */
+.tile.shake{
+  animation: shake 250ms ease-in-out;
+}
+@keyframes shake {
+  10% {
+    transform: translateX(-5%);
+  }
+  30% {
+    transform: translateX(5%);
+  }
+  50% {
+    transform: translateX(-7.5%);
+  }
+  70% {
+    transform: translateX(7.5%);
+  }
+  90% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* for after each guess */
+.tile.flip{
+  transform: rotateX(90deg);
+}
+
+/* keyboard Styling */
+
+#keyboard-container {
+  display: grid;
+  grid-template-columns: repeat(20, minmax(auto, 1.25em));
+  grid-auto-rows: 3em;
+  gap: .25em;
+  justify-content: center;
+  padding-bottom: 20px;  
+}
+.key {
+  font-size: inherit;
+  grid-column: span 2;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #C5C6C7;
+  color: black;
+  border-radius: .25em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.wide-button {
+  cursor: pointer;
+  font-size: inherit;
+  background-color: #C5C6C7;
+  grid-column: span 3;
+  width: max-content;
+  border-radius: .25em;
+}
+
+.key:hover {
+  background-color: #70819B;
+  color: #C21BA3;
+}
+.wide-button:hover{
+  background-color: #70819B;
+  color: #C21BA3;
+}
+
+.key.wrong {
+  border: none;
+  background-color: #747475;
+}
+
+.key.correct{
+  border: none;
+  background-color: #92D0CC;
+  color:#0B0C10;
+}
+
+.key.wrong-location{
+  border:none;
+  background-color: #C21BA3;
+  color:#0B0C10;
+}
+
+main {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+#rules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0B0C10;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  border-width: 10px;
+  border-style: double;
+  border-color: #66FCF1;
+  width: max-content;
+  padding: 20px;
+}
+#rules h3{
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 3px #66FCF1;
+  margin-bottom: 20px;
+}
+
+#rules ul{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#rules li {
+  padding: 7px;
+  font-size: 1.2rem;
+}
+/* footer Styling */
+footer {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.foot-left{
+  display: flex;
+  margin: 5px;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-start;
+  color: gainsboro;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 15px;
+}
+
+
+.foot-mid {
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+}
+
+.foot-right{
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  color: gainsboro;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+}

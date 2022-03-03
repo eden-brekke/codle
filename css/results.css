@@ -1,0 +1,164 @@
+/* Color Palette 
+Very Dark Blue: #0B0C10
+Dark Navy Blue: #132440
+Grey Navy Blue: #1F2833
+Light Grey Blue: #1B3B6F 
+Light Grey: #C5C6C7
+light Turquoise Grey: #92D0CC
+Turquoise: #66FCF1
+Muted Turquoise: #45A29E
+Wrong Location Pink: #C21BA3
+Light Pink: #D09BC6  */
+
+body {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+}
+
+/* header styling */
+nav {
+  position: relative;
+  padding-top:30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  
+}
+.title {
+  color: gainsboro;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  text-shadow: 2px 2px 3px #66FCF1;
+}
+
+.menu-left {
+  display: flex;
+  padding: 0;
+  width: auto;
+  justify-content: flex-start;
+  align-items: left;
+  color: gainsboro;
+  font-size: 1.5rem;
+  margin: 5px;
+  position: absolute;
+}
+
+.menu-right {
+    display: flex;
+    width: auto;
+    justify-content: right;
+    align-items: right;
+    font-size: 1.5rem;
+    margin: 5px;
+    color: gainsboro;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+  }
+
+  a {
+    color: gainsboro;
+    text-decoration: none;
+  }
+  a:visited {
+    text-decoration: none;
+    color: rgb(159, 184, 218);
+  }
+  a:hover {
+    background-color: #92D0CC;
+    color: black;
+    padding: 3px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    text-decoration: none;
+  }
+  a:focus{
+  text-decoration: none;
+}
+
+/* main styling */
+
+main {
+  padding: 30px;
+  background-color: #132440;
+  height: 500px;
+}
+
+/* footer styling */
+footer {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.foot-left{
+  display: flex;
+  margin: 5px;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-start;
+  color: gainsboro;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 15px;
+}
+
+
+.foot-mid {
+  color: gainsboro;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+}
+
+.foot-right{
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  width: auto;
+  justify-content: flex-end;
+  font-size: 1.2rem;
+  color: gainsboro;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+}
+
+main div {
+
+  background-color: #0B0C10;
+  border-radius: 15px;
+  padding: 1%;
+  text-align: center;
+  color: gainsboro;
+  font-weight: bold;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+}

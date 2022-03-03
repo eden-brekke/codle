@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Code Wordle</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="menu-left"><a href="aboutus.html">Meet the Team</a></div>
+      <div class="title">CODLE</div>
+      <div class="menu-right"><a href="results.html">Game Results</a></div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="container">
+      <div id="game">
+        <!-- prepping for DOM manipulation pop up -->
+        <div id="alert-container"></div>
+        <div id="board-container">
+          <div data-guess-grid class="guess-grid">
+            <div id="tile1" class="tile"></div>
+            <div id="tile2" class="tile"></div>
+            <div id="tile3" class="tile"></div>
+            <div id="tile4" class="tile"></div>
+            <div id="tile5" class="tile"></div>
+            <div id="tile6" class="tile"></div>
+            <div id="tile7" class="tile"></div>
+            <div id="tile8" class="tile"></div>
+            <div id="tile9" class="tile"></div>
+            <div id="tile10" class="tile"></div>
+            <div id="tile11" class="tile"></div>
+            <div id="tile12" class="tile"></div>
+            <div id="tile13" class="tile"></div>
+            <div id="tile14" class="tile"></div>
+            <div id="tile15" class="tile"></div>
+            <div id="tile16" class="tile"></div>
+            <div id="tile17" class="tile"></div>
+            <div id="tile18" class="tile"></div>
+            <div id="tile19" class="tile"></div>
+            <div id="tile20" class="tile"></div>
+            <div id="tile21" class="tile"></div>
+            <div id="tile22" class="tile"></div>
+            <div id="tile23" class="tile"></div>
+            <div id="tile24" class="tile"></div>
+            <div id="tile25" class="tile"></div>
+            <div id="tile26" class="tile"></div>
+            <div id="tile27" class="tile"></div>
+            <div id="tile28" class="tile"></div>
+            <div id="tile29" class="tile"></div>
+            <div id="tile30" class="tile"></div>
+          </div>
+        </div>
+        <div data-keyboard id="keyboard-container">
+          <!-- <div class="keyboard-row"> -->
+          <button class="key" data-key="q">Q</button>
+          <button class="key" data-key="w">W</button>
+          <button class="key" data-key="e">E</button>
+          <button class="key" data-key="r">R</button>
+          <button class="key" data-key="t">T</button>
+          <button class="key" data-key="y">Y</button>
+          <button class="key" data-key="u">U</button>
+          <button class="key" data-key="i">I</button>
+          <button class="key" data-key="o">O</button>
+          <button class="key" data-key="p">P</button>
+          <!-- </div> -->
+          <div class="space"></div>
+          <!-- <div class="keyboard-row"> -->
+          <button class="key" data-key="a">A</button>
+          <button class="key" data-key="s">S</button>
+          <button class="key" data-key="d">D</button>
+          <button class="key" data-key="f">F</button>
+          <button class="key" data-key="g">G</button>
+          <button class="key" data-key="h">H</button>
+          <button class="key" data-key="j">J</button>
+          <button class="key" data-key="k">K</button>
+          <button class="key" data-key="l">L</button>
+          <!-- </div> -->
+          <div class="space"></div>
+          <!-- <div class="keyboard-row"> -->
+          <button data-enter class="wide-button">ENTER</button>
+          <button class="key" data-key="z">Z</button>
+          <button class="key" data-key="x">X</button>
+          <button class="key" data-key="c">C</button>
+          <button class="key" data-key="v">V</button>
+          <button class="key" data-key="b">B</button>
+          <button class="key" data-key="n">N</button>
+          <button class="key" data-key="m">M</button>
+          <button data-delete class="wide-button">DELETE</button>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <article id="rules">
+      <h3>CODLE RULES</h3>
+      <ul>
+        <li>There is a set list of 5-letter terms in relation the JavaScript, HTML, and CSS</li>
+        <li>The game will select a term at random and you have to guess the term!</li>
+        <li>Click the letters on the on-screen keyboard to spell out the term.</li>
+        <li>If you got the letter correct, but in the wrong place, the tile will turn Pink.</li>
+        <li>If you got the letter correct and in the correct place, the tile will turn Blue!</li>
+        <li>If the letter is incorrect the tile will turn grey. </li>
+      </ul>
+    </article>
+  </main>
+  <footer>
+    <p class="foot-left"><a href="https://github.com/Team-Salt-Lake-City/code-wordle">GitHub</a></p>
+    <p class="foot-mid">Real Coders of Salt Lake City </p>
+    <p class="foot-right">Code Fellows</p>
+  </footer>
+  <script src="js/constructors.js"></script>
+  <script src="js/functionality.js"></script>
+  <!-- <script src="js/app.js"></script> -->
+</body>
+
+</html>
