@@ -94,12 +94,16 @@ function letterCheck(word, tile) {
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck(word, tile) {
   for (let i = 0; i < wordLength; i++) {
+    console.log(word[i]);
+    console.log(userGuess[i]);
     if (word[i] === userGuess[i]) {
+      console.log('if');
       let tileLetter = tile[i].innerText.toLowerCase();
-      let key = document.querySelector(`[data-key='${tileLetter}']`);
-      key.classList.remove('wrong-location');
-      tile.dataset.state = 'correct';
-      key.classList.add('correct');
+      // let key = document.querySelector(`[data-key='${tileLetter}']`);
+      document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
+      delete tile[i].dataset.state;
+      tile[i].dataset.state = 'correct';
+      // key.classList.add('correct');
     }
   }
 }
@@ -366,17 +370,17 @@ document.addEventListener("click", handleMouseClick);
 // document.addEventListener('click', handlePlayAgain);
 
 //color
-function colorChange(tile) {
-  let letter = tile.dataset.letter;
-  let key = keyboard.querySelection(`[data-key='${letter}'i]`);
-  if (userGuess[i] === index) {
-    tile.dataset.state = 'correct';
-    key.classList.add('correct');
-  } else if (userGuess.includes(letter)) {
-    tile.dataset.state = 'wrong-location';
-    key.classList.add('wrong-location');
-  } else {
-    tile.dataset.state = 'wrong';
-    key.classList.add('wrong');
-  }
-}
+// function colorChange(tile) {
+//   let letter = tile.dataset.letter;
+//   let key = keyboard.querySelection(`[data-key='${letter}'i]`);
+//   if (userGuess[i] === index) {
+//     tile.dataset.state = 'correct';
+//     key.classList.add('correct');
+//   } else if (userGuess.includes(letter)) {
+//     tile.dataset.state = 'wrong-location';
+//     key.classList.add('wrong-location');
+//   } else {
+//     tile.dataset.state = 'wrong';
+//     key.classList.add('wrong');
+//   }
+// }
