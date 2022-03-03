@@ -23,7 +23,7 @@ instantiate new results object to increment on game win or lose.
 //DOM window for winOrLose
 let endGameAlert = document.getElementById('alert-container');
 
-//local storage use
+// local storage use
 // let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
 // let results;
 
@@ -73,9 +73,11 @@ function wordCheck(word, tile) { // works
       key.className = 'key correct';
     }
     won = true;
+    danceTile(tile);
     return true;
   } else {
     won = false;
+    shakeTile(tile);
     return false;
   }
 }
@@ -99,14 +101,16 @@ function indexCheck(word, tile) {
   for (let i = 0; i < wordLength; i++) {
     if (word[i] === userGuess[i]) {
       let tileLetter = tile[i].dataset.letter;
-      let key = document.querySelector(`[data-key='${tileLetter}']`);
-      document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
+      let key = document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
       // delete tile[i].dataset.state;
       tile[i].className = 'tile correct';
       key.className = 'key correct';
+    // } else if(word[i] !== userGuess[i]) {
+    //   let tileLetter = tile[i].dataset.letter;
+    //   let key = document.querySelector(`:not([data-key=${tileLetter}]`).className = 'wrong';
+    //   tile[i].className = 'tile wrong shake';
+    //   key.className = 'key wrong';
     }
-    // tile[i].classname = 'tile wrong';
-    // key.className = 'key wrong';
   }
 }
 
@@ -176,6 +180,28 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
 }
 
 
+function resultsDisplay(results) {
+  let totalRounds = document.getElementById('rounds-played');
+  let pElem = document.createElement('p');
+  pElem.textContent = results.roundsPlayed;
+  totalRounds.appendChild(pElem);
+
+  let winPercentage = document.getElementById('win-percentage');
+  let p1Elem = document.createElement('p');
+  p1Elem.textContent = results.winPercent;
+  winPercentage.appendChild(p1Elem);
+
+  let currentWins = document.getElementById('win-streak');
+  let p2Elem = document.createElement('p');
+  p2Elem.textContent = results.currentStreak;
+  currentWins.appendChild(p2Elem);
+
+  let bestWins = document.getElementById('best-win-streak');
+  let p3Elem = document.createElement('p');
+  p3Elem.textContent = results.bestStreak;
+  bestWins.appendChild(p3Elem);
+}
+
 
 // ------------ EVENT HANDLERS -------------
 
@@ -185,7 +211,6 @@ function handleMouseClick(event) {
     return;
   }
   if (event.target.matches('[data-enter]')) { // data-enter is assigned to enter key so that when you press it it will invoke the userGuess -EB
-    guessAlert();
     return;
   }
   if (event.target.matches('[data-delete]')) { // data-delete is assigned to the delete key so that when you press it it will invoke the removeLetter function -EB
@@ -230,49 +255,58 @@ function removeLetter() { // remove a letter from grid -EB
 }
 
 
-function guessAlert() {
-  let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
-  if (userGuess !== wordLength) {
-    // alert('Not Enough Letters!');
-    shakeTile(activeTile);
-    return;
-  }
-  if (!Word.wordsArr.includes(userGuess)) {
-    // alert('Not in word list');
-    shakeTile(activeTile);
-    return;
-  }
-}
-
 // ------------- ANIMATIONS ------------
 
-//####################### I need these to be tested ##########
 function shakeTile(tiles) {
   tiles.forEach(function (tile) {
-    tile.classList.remove('shake');
     tile.classList.add('shake');
+    tile.addEventListener(
+      'animationEnd',
+      function () {
+        tile.className = 'tile';
+      },
+      { once: true }
+    );
   });
 }
 
-//I have variables for flip tile and dancing tile animations durations, I need to figure out where we need to input those
+
 function danceTile(tiles) {
-  tiles.forEach(function (tile) {
-    tile.classList.add('dance');
+  tiles.forEach(function (tile, index) {
+    setTimeout(function () {
+      tile.className = 'tile dance correct';
+      tile.addEventListener(
+        'animationEnd',
+        function () {
+          tile.className = 'tile';
+        },
+        { once: true }
+      );
+    }, (index * danceAnimationDuration) / 5);
   });
 }
 
 function flipTile(tiles) {
-  tiles.forEach(function (tile) {
-    tile.classList.add('flip');
+  tiles.forEach(function (tile, index) {
+    setTimeout(function () {
+      tile.className = 'tile flip';
+      tile.addEventListener(
+        'animationEnd',
+        function () {
+          tile.className = 'tile';
+        },
+        { once: true }
+      );
+    }, (index * flipAnimationDuration) / 5);
   });
 }
+
 
 function handlePlayAgain() {
   if ((event.target.matches('[data-enter]'))) {
     playGame();
   }
 }
-
 
 
 // --------------- CONTROL FLOW ---------------
@@ -350,6 +384,7 @@ function playGame(wordsArr) {
 playGame();
 
 // -------------- EVENT LISTENERS ---------------
+
 
 // End of app JS listeners ^^^
 
