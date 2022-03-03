@@ -231,20 +231,39 @@ function guessAlert() {
 // ------------- ANIMATIONS ------------
 
 // This only works once. needs work. 
+// function shakeTile(tiles) {
+//   tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
+//     tile.classList.add('shake'); // shake is reference to CSS style -EB
+//     tile.addEventListener(
+//       'animationEnd',
+//       function () {
+//         tile.classList.remove('shake');
+//       },
+//       // { once: true }
+//     ); // eslint-disable-line
+//   });
+// }
+
+//####################### I need these to be tested ##########
 function shakeTile(tiles) {
-  tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
-    tile.classList.add('shake'); // shake is reference to CSS style -EB
-    tile.addEventListener(
-      'animationEnd',
-      function () {
-        tile.classList.remove('shake');
-      },
-      // { once: true }
-    ); // eslint-disable-line
+  tiles.forEach(function (tile) {
+    tile.classList.remove('shake');
+    tile.classList.add('shake');
   });
 }
 
+//I have variables for flip tile and dancing tile animations durations, I need to figure out where we need to input those
+function danceTile(tiles) {
+  tiles.forEach(function (tile) {
+    tile.classList.add('dance');
+  });
+}
 
+function flipTile(tiles) {
+  tiles.forEach(function (tile) {
+    tile.classList.add('flip');
+  });
+}
 
 // function handlePlayAgain() {
 //   if ((event.target.matches('[data-enter]'))) {
