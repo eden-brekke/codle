@@ -63,9 +63,10 @@ let won;
 function wordCheck(word, tile) { // works
   if (userGuess === word) {
     for (let i = 0; i < wordLength; i++) {
-      let tileLetter = tile[i].innerText.toLowerCase();
+      let tileLetter = tile[i].dataset.letter;
+      // let tileArr = Array.from(tile);
       let key = document.querySelector(`[data-key='${tileLetter}']`);
-      console.log(i);
+      console.log(tileArr);
       tile[i].dataset.state = 'correct';
       key.classList.add('correct');
     }
@@ -80,9 +81,10 @@ function wordCheck(word, tile) { // works
 // this function checks if any of the letters in the guess match the selected word, and calls the function to check its index
 // TODO: should check using .includes if letter in guess === letter in word, than calls indexcheck on that letter than yellowletter or greenletter.
 function letterCheck(word, tile) {
+  console.log(tile);
   for (let i = 0; i < wordLength; i++) {
     if (word.includes(userGuess[i])) {
-      let tileLetter = tile[i].innerText.toLowerCase();
+      let tileLetter = tile[i].dataset.letter;
       let key = document.querySelector(`[data-key='${tileLetter}']`);
       tile[i].dataset.state = 'wrong-location';
       key.classList.add('wrong-location');
@@ -93,12 +95,13 @@ function letterCheck(word, tile) {
 // this function will compare the index location of correct guessed letter vs word letter and turn board and keyboard green if match.
 // TODO: should check index location of guessed letter against word. and call greenLetter if both true.
 function indexCheck(word, tile) {
+  console.log('tile in indexCheck', tile);
   for (let i = 0; i < wordLength; i++) {
     console.log(word[i]);
     console.log(userGuess[i]);
     if (word[i] === userGuess[i]) {
       console.log('if');
-      let tileLetter = tile[i].innerText.toLowerCase();
+      let tileLetter = tile[i].dataset.letter;
       // let key = document.querySelector(`[data-key='${tileLetter}']`);
       document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
       delete tile[i].dataset.state;
@@ -192,7 +195,7 @@ function addLetter(key) {
 }
 
 function getActiveTile() {
-  return guessGrid.querySelectorAll('[data-state="active"]'); // grab the guessing grid from index.html and set all their data-states to active -EB
+  return [...guessGrid.querySelectorAll('[data-state="active"]')]; // grab the guessing grid from index.html and set all their data-states to active -EB
 }
 
 // removes letter from board when user pressed delete button on keyboard.
