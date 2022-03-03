@@ -1,10 +1,14 @@
 /* Color Palette 
 Very Dark Blue: #0B0C10
-Grey Navy Blue: #1F2833 
+Dark Navy Blue: #132440
+Grey Navy Blue: #1F2833
+Light Grey Blue: #1B3B6F 
 Light Grey: #C5C6C7
+light Turquoise Grey: #92D0CC
 Turquoise: #66FCF1
-Muted Turquoise: #45A29E  */
-
+Muted Turquoise: #45A29E
+Wrong Location Pink: #C21BA3
+Light Pink: #D09BC6  */
 body {
   background-color: #0B0C10;
   color: #C5C6C7;
