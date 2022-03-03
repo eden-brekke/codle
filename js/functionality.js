@@ -70,7 +70,6 @@ function wordCheck(word, tile) { // works
       key.className = 'key correct';
     }
     won = true;
-    alert('You got it!');
     danceTile(tile);
     return true;
   } else {
@@ -104,14 +103,16 @@ function indexCheck(word, tile) {
     if (word[i] === userGuess[i]) {
       console.log('if');
       let tileLetter = tile[i].dataset.letter;
-      let key = document.querySelector(`[data-key='${tileLetter}']`);
-      document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
+      let key = document.querySelector(`[data-key='${tileLetter}']`).className = 'correct';
       // delete tile[i].dataset.state;
       tile[i].className = 'tile correct';
       key.className = 'key correct';
+    // } else if(word[i] !== userGuess[i]) {
+    //   let tileLetter = tile[i].dataset.letter;
+    //   let key = document.querySelector(`:not([data-key=${tileLetter}]`).className = 'wrong';
+    //   tile[i].className = 'tile wrong shake';
+    //   key.className = 'key wrong';
     }
-    // tile[i].classname = 'tile wrong';
-    // key.className = 'key wrong';
   }
 }
 
@@ -178,7 +179,6 @@ function handleMouseClick(event) {
     return;
   }
   if (event.target.matches('[data-enter]')) { // data-enter is assigned to enter key so that when you press it it will invoke the userGuess -EB
-    // guessAlert();
     return;
   }
   if (event.target.matches('[data-delete]')) { // data-delete is assigned to the delete key so that when you press it it will invoke the removeLetter function -EB
@@ -223,37 +223,10 @@ function removeLetter() { // remove a letter from grid -EB
 }
 
 
-// function guessAlert(word, tile) {
-//   let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
-//   // if (userGuess !== wordLength) {
-//   //   // alert('Not Enough Letters!');
-//   //   shakeTile(activeTile);
-//   //   return;
-//   // }
-//   if (userGuess !== word) {
-//     alert('Incorrect! Try again.');
-//     for (let i = 0; i < wordLength; i++) {
-//       let tileLetter = tile[i].dataset.letter;
-//       tile[i].className = 'tile shake';
-//       shakeTile(tileLetter);
-//     }
-//     // I forget what we called our word :)
-//     if (userGuess === word) {
-//       alert('Correct!');
-//       // let tileLetter = tile.dataset.letter;
-//       danceTile(activeTile);
-//     }
-//   }
-// }
+
 
 // ------------- ANIMATIONS ------------
 
-// function shakeTile(tiles) {
-//   tiles.forEach(function (tile) {
-//     tile.classList.remove('shake');
-//     tile.classList.add('shake');
-//   });
-// }
 function shakeTile(tiles) {
   tiles.forEach(function (tile) {
     tile.classList.add('shake');
@@ -271,7 +244,7 @@ function shakeTile(tiles) {
 function danceTile(tiles) {
   tiles.forEach(function (tile, index) {
     setTimeout(function () {
-      tile.className = 'tile dance';
+      tile.className = 'tile dance correct';
       tile.addEventListener(
         'animationEnd',
         function () {
