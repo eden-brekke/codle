@@ -177,9 +177,9 @@ nav {
   align-items: center;
   justify-content: center;
   margin: 30px;
-  font-size: 3rem;
-  color: #751163;
-  text-shadow: 2px 2px 3px #66FCF1;
+  font-size: 3.5rem;
+  color: #570c49;
+  /* text-shadow: 2px 2px 3px #66FCF1; */
 }
 #eden img {
   grid-area: img;
