@@ -45,6 +45,14 @@ function percentCalc(results) {
   results.winPercent = percent;
 }
 
+function bestStreakCalc(results) {
+  let best = parseInt(results.bestStreak);
+  let current = parseInt(results.currentStreak);
+  if(best < current) {
+    results.bestStreak = current;
+  }
+}
+
 // DONE: generate a random number in relation to the length of the words array.
 function randIndexGenerator() {
   let randIndex = Math.floor(Math.random() * Word.wordsArr.length);
@@ -144,6 +152,7 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
     results.roundsWon++;
     results.currentStreak++;
     percentCalc(results);
+    bestStreakCalc(results);
     setToLocalStorage(results);
     //play again button
     let playAgainButton = document.createElement('button');
@@ -160,6 +169,7 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
   else if (attempts === 6) {
     results.currentStreak = 0;
     percentCalc(results);
+    bestStreakCalc();
     setToLocalStorage(results);
     //play again button
     let playAgainButton = document.createElement('button');
@@ -172,10 +182,6 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
     resultsButton.textContent = 'Results';
     aElem.appendChild(resultsButton);
     endGameAlert.appendChild(aElem);
-  }
-  //checks currentSteak against best Streak
-  if (results.currentStreak > results.bestStreak) {
-    results.bestStreak = results.currentStreak;
   }
 }
 
