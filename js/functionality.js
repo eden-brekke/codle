@@ -181,7 +181,8 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
 
 
 function resultsDisplay(results) {
-  let totalRounds = document.getElementById('rounds-played');
+  let totalRounds = document.querySelector('#rounds-played');
+  console.log(totalRounds);
   let pElem = document.createElement('p');
   pElem.textContent = results.roundsPlayed;
   totalRounds.appendChild(pElem);
@@ -337,7 +338,6 @@ function playGame(wordsArr) {
       bestStreak: 0,
     };
   }
-
   // gameplay begins
   let word = wordSelector();
   console.log(word);
@@ -353,6 +353,7 @@ function playGame(wordsArr) {
     if ((event.target.matches('[data-enter]'))) {
       if (wordCheck(word, getActiveTile())) {
         winOrLose(results, word, attempts, wordIndex, wordsArr);
+        resultsDisplay(results);
       } else {
         letterCheck(word, getActiveTile()); // return indexs in userguess that are in word
         indexCheck(word, getActiveTile());
@@ -389,4 +390,4 @@ playGame();
 // End of app JS listeners ^^^
 
 document.addEventListener("click", handleMouseClick);
-alertContainer.addEventListener("submit", handlePlayAgain)
+// alertContainer.addEventListener("submit", handlePlayAgain);
