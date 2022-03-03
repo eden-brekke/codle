@@ -1,10 +1,10 @@
 'use strict';
 
-//------------- DOM WINDOW -------------
+//------------- DOM WINDOW ----------------
+
 let guessGrid = document.querySelector('[data-guess-grid]');
+let alertContainer = document.querySelector("[data-alert-container]");
 let endGameAlert = document.getElementById('alert-container');
-
-
 
 // ------------- GLOBAL VARIABLES -----------
 let wordLength = 5;
@@ -17,11 +17,11 @@ let won;
 
 // ------------ FUNCTIONS ------------------
 
+
 function percentCalc(results) {
   let percent = (parseInt(results.roundsWon) / parseInt(results.roundsPlayed)) * 100;
   results.winPercent = percent;
 }
-
 
 function bestStreakCalc(results) {
   let best = parseInt(results.bestStreak);
@@ -30,8 +30,6 @@ function bestStreakCalc(results) {
     results.bestStreak = current;
   }
 }
-
-
 
 function randIndexGenerator() {
   let randIndex = Math.floor(Math.random() * Word.wordsArr.length);
@@ -89,7 +87,6 @@ function setToLocalStorage(results) {
   localStorage.setItem('storedResults', storedResults);
 }
 
-
 function winOrLose(results, word, attempts, wordIndex) {
   results.roundsPlayed++;
   if (won) {
@@ -107,6 +104,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     percentCalc(results);
     bestStreakCalc(results);
     setToLocalStorage(results);
+    endGameAlert.className += 'popup';
     let playAgainButton = document.createElement('button');
     playAgainButton.setAttribute('type', 'submit');
     playAgainButton.textContent = 'Play Again';
@@ -132,6 +130,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     percentCalc(results);
     bestStreakCalc();
     setToLocalStorage(results);
+    endGameAlert.className += 'popup';
     let indexElem = document.createElement('a');
     indexElem.href = '/index.html';
     let playAgainButton = document.createElement('button');
@@ -180,7 +179,6 @@ function getActiveTile() {
   return [...guessGrid.querySelectorAll('[data-state="active"]')];
 }
 
-
 function removeLetter() {
   let activeTile = getActiveTile();
   let lastTile = activeTile[activeTile.length - 1];
@@ -227,9 +225,6 @@ function danceTile(tiles) {
 
 // --------------- CONTROL FLOW ---------------
 
-
-
-
 function playGame(wordsArr) {
   let parsedResults = JSON.parse(localStorage.getItem('storedResults'));
   let results;
@@ -247,7 +242,6 @@ function playGame(wordsArr) {
 
   let word = wordSelector();
   console.log(word);
-
 
   let tileCounter = 0;
   let whileClose = 0;
@@ -284,9 +278,7 @@ playGame();
 
 // -------------- EVENT LISTENERS ---------------
 
-
 document.addEventListener('click', handleMouseClick);
-
 
 // -------------- COMMENTED OUT VARIABLES DOM WINDOWS, FUNCTIONS AND LISTENER ----------------------
 
@@ -317,5 +309,3 @@ document.addEventListener('click', handleMouseClick);
 
 
 // endGameAlert.addEventListener('submit', handlePlayAgain);
-
-document.addEventListener("click", handleMouseClick);

@@ -106,8 +106,44 @@ nav {
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
+/* alert container */
+
+#alert-container.popup {
+  position: absolute;
+  background-color: rgb(146, 208, 204, .85);
+  color: black;
+  top: 90px;
+  width: 200px;
+  padding: 60px;
+  border-radius: 10px;
+  left: 90px;
+}
+
+#alert-container.popup h3 {
+  font-size: xxx-large;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: 500;
+  padding-bottom: 15px;
+}
+
+#alert-container.popup p {
+  font-family: sans-serif;
+  font-size: 14pt;
+  text-align: center;
+}
+
+#alert-container.popup button {
+  padding: 15px;
+  border-radius: 5px;
+}
+
+#alert-container.popup a {
+  padding-left: 12px;
+}
 
 /* guess tile styling */
 
