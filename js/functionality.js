@@ -45,6 +45,14 @@ function percentCalc(results) {
   results.winPercent = percent;
 }
 
+function bestStreakCalc(results) {
+  let best = parseInt(results.bestStreak);
+  let current = parseInt(results.currentStreak);
+  if(best < current) {
+    results.bestStreak = current;
+  }
+}
+
 // DONE: generate a random number in relation to the length of the words array.
 function randIndexGenerator() {
   let randIndex = Math.floor(Math.random() * Word.wordsArr.length);
@@ -144,6 +152,7 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
     results.roundsWon++;
     results.currentStreak++;
     percentCalc(results);
+    bestStreakCalc(results);
     setToLocalStorage(results);
     //play again button
     let playAgainButton = document.createElement('button');
@@ -160,6 +169,7 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
   else if (attempts === 6) {
     results.currentStreak = 0;
     percentCalc(results);
+    bestStreakCalc();
     setToLocalStorage(results);
     //play again button
     let playAgainButton = document.createElement('button');
@@ -173,35 +183,7 @@ function winOrLose(results, word, attempts, wordIndex, wordsArr) {
     aElem.appendChild(resultsButton);
     endGameAlert.appendChild(aElem);
   }
-  //checks currentSteak against best Streak
-  if (results.currentStreak > results.bestStreak) {
-    results.bestStreak = results.currentStreak;
-  }
 }
-
-
-function resultsDisplay(results) {
-  let totalRounds = document.getElementById('rounds-played');
-  let pElem = document.createElement('p');
-  pElem.textContent = results.roundsPlayed;
-  totalRounds.appendChild(pElem);
-
-  let winPercentage = document.getElementById('win-percentage');
-  let p1Elem = document.createElement('p');
-  p1Elem.textContent = results.winPercent;
-  winPercentage.appendChild(p1Elem);
-
-  let currentWins = document.getElementById('win-streak');
-  let p2Elem = document.createElement('p');
-  p2Elem.textContent = results.currentStreak;
-  currentWins.appendChild(p2Elem);
-
-  let bestWins = document.getElementById('best-win-streak');
-  let p3Elem = document.createElement('p');
-  p3Elem.textContent = results.bestStreak;
-  bestWins.appendChild(p3Elem);
-}
-
 
 // ------------ EVENT HANDLERS -------------
 
@@ -337,7 +319,6 @@ function playGame(wordsArr) {
       bestStreak: 0,
     };
   }
-
   // gameplay begins
   let word = wordSelector();
   console.log(word);
@@ -389,4 +370,4 @@ playGame();
 // End of app JS listeners ^^^
 
 document.addEventListener("click", handleMouseClick);
-alertContainer.addEventListener("submit", handlePlayAgain)
+// alertContainer.addEventListener("submit", handlePlayAgain);
