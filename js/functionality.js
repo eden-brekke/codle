@@ -70,6 +70,8 @@ function wordCheck(word, tile) { // works
       key.className = 'key correct';
     }
     won = true;
+    alert('You got it!');
+    danceTile(tile);
     return true;
   } else {
     won = false;
@@ -87,7 +89,7 @@ function letterCheck(word, tile) {
       let key = document.querySelector(`[data-key='${tileLetter}']`);
       tile[i].className = 'tile wrong-location';
       key.className = 'key wrong-location';
-    } 
+    }
   }
 }
 
@@ -149,7 +151,7 @@ function winOrLose(results, word) {
     percentCalc(results);
     setToLocalStorage(results);
   }
-  
+
   //checks currentSteak against best Streak
   if (results.currentStreak > results.bestStreak) {
     results.bestStreak = results.currentStreak;
@@ -220,54 +222,78 @@ function removeLetter() { // remove a letter from grid -EB
 }
 
 
-function guessAlert() {
-  let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
-  if (userGuess !== wordLength) {
-    // alert('Not Enough Letters!');
-    shakeTile(activeTile);
-    return;
-  }
-  if (!Word.wordsArr.includes(userGuess)) {
-    // alert('Not in word list');
-    shakeTile(activeTile);
-    return;
-  }
-}
+// function guessAlert(word, tile) {
+//   let activeTile = [...getActiveTile()]; // using a ... rest parameter to accept an indefinite number of arguments into the array -EB
+//   // if (userGuess !== wordLength) {
+//   //   // alert('Not Enough Letters!');
+//   //   shakeTile(activeTile);
+//   //   return;
+//   // }
+//   if (userGuess !== word) {
+//     alert('Incorrect! Try again.');
+//     for (let i = 0; i < wordLength; i++) {
+//       let tileLetter = tile[i].dataset.letter;
+//       tile[i].className = 'tile shake';
+//       shakeTile(tileLetter);
+//     }
+//     // I forget what we called our word :)
+//     if (userGuess === word) {
+//       alert('Correct!');
+//       // let tileLetter = tile.dataset.letter;
+//       danceTile(activeTile);
+//     }
+//   }
+// }
 
 // ------------- ANIMATIONS ------------
 
-// This only works once. needs work. 
 // function shakeTile(tiles) {
-//   tiles.forEach(function (tile) { // if the tiles are regarded as an array then forEach targets each individual tile -EB
-//     tile.classList.add('shake'); // shake is reference to CSS style -EB
-//     tile.addEventListener(
-//       'animationEnd',
-//       function () {
-//         tile.classList.remove('shake');
-//       },
-//       // { once: true }
-//     ); // eslint-disable-line
+//   tiles.forEach(function (tile) {
+//     tile.classList.remove('shake');
+//     tile.classList.add('shake');
 //   });
 // }
-
-//####################### I need these to be tested ##########
 function shakeTile(tiles) {
   tiles.forEach(function (tile) {
-    tile.classList.remove('shake');
     tile.classList.add('shake');
+    tile.addEventListener(
+      'animationEnd',
+      function () {
+        tile.className = 'tile';
+      },
+      { once: true }
+    );
   });
 }
 
-//I have variables for flip tile and dancing tile animations durations, I need to figure out where we need to input those
+
 function danceTile(tiles) {
-  tiles.forEach(function (tile) {
-    tile.classList.add('dance');
+  tiles.forEach(function (tile, index) {
+    setTimeout(function () {
+      tile.className = 'tile dance';
+      tile.addEventListener(
+        'animationEnd',
+        function () {
+          tile.className = 'tile';
+        },
+        { once: true }
+      );
+    }, (index * danceAnimationDuration) / 5);
   });
 }
 
 function flipTile(tiles) {
-  tiles.forEach(function (tile) {
-    tile.classList.add('flip');
+  tiles.forEach(function (tile, index) {
+    setTimeout(function () {
+      tile.className = 'tile flip';
+      tile.addEventListener(
+        'animationEnd',
+        function () {
+          tile.className = 'tile';
+        },
+        { once: true }
+      );
+    }, (index * flipAnimationDuration) / 5);
   });
 }
 
@@ -279,9 +305,9 @@ function flipTile(tiles) {
 
 
 /*
-
+ 
 Everything bellow here is from app.js for testing
-
+ 
 */
 
 
@@ -360,9 +386,9 @@ playGame();
 // -------------- EVENT LISTENERS ---------------
 
 /*
-
+ 
 from app.js
-
+ 
 */
 
 
