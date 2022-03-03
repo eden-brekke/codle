@@ -3,12 +3,11 @@
 //------------- DOM WINDOW -------------
 let guessGrid = document.querySelector('[data-guess-grid]');
 let endGameAlert = document.getElementById('alert-container');
-// let keyboard = document.querySelector("[data-keyboard]");
+
 
 
 // ------------- GLOBAL VARIABLES -----------
 let wordLength = 5;
-let flipAnimationDuration = 500;
 let danceAnimationDuration = 500;
 let userGuess = '';
 let guess = [];
@@ -236,27 +235,6 @@ function danceTile(tiles) {
   });
 }
 
-function flipTile(tiles) {
-  tiles.forEach(function (tile, index) {
-    setTimeout(function () {
-      tile.className = 'tile flip';
-      tile.addEventListener(
-        'animationEnd',
-        function () {
-          tile.className = 'tile';
-        },
-        { once: true }
-      );
-    }, (index * flipAnimationDuration) / 5);
-  });
-}
-
-
-// play again functionality still not working #############
-// function handlePlayAgain() {
-//   window.location.reload();
-//   // playGame();
-// }
 
 
 // --------------- CONTROL FLOW ---------------
@@ -320,4 +298,33 @@ playGame();
 
 
 document.addEventListener('click', handleMouseClick);
-// alertContainer.addEventListener('submit', handlePlayAgain);
+
+
+// -------------- COMMENTED OUT VARIABLES DOM WINDOWS, FUNCTIONS AND LISTENER ----------------------
+
+// let keyboard = document.querySelector("[data-keyboard]");
+// let flipAnimationDuration = 500;
+
+// Flip tile function unused as of now
+// function flipTile(tiles) {
+  //   tiles.forEach(function (tile, index) {
+//     setTimeout(function () {
+//       tile.className = 'tile flip';
+//       tile.addEventListener(
+//         'animationEnd',
+//         function () {
+//           tile.className = 'tile';
+//         },
+//         { once: true }
+//       );
+//     }, (index * flipAnimationDuration) / 5);
+//   });
+// }
+
+// play again functionality still not working #############
+// function handlePlayAgain() {
+//   window.location.reload();
+//   // playGame();
+// }
+
+// endGameAlert.addEventListener('submit', handlePlayAgain);
