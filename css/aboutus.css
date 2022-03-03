@@ -308,9 +308,7 @@ footer {
 #ben img {
   width: 530px;
   grid-area: img;
-
   border-radius: 30px;
-
   float: left;
 }
 
