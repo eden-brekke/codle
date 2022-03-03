@@ -16,6 +16,13 @@ body {
 header {
   border-bottom: 1px solid rgb(58, 58, 60);
 }
+nav {
+  position: relative;
+  padding-top:30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .title {
   color: gainsboro;
   font-size: 2.5rem;
@@ -34,6 +41,7 @@ header {
   color: gainsboro;
   font-size: 1.5rem;
   margin: 5px;
+  position: absolute;
 }
 
 .menu-right {
@@ -44,6 +52,9 @@ header {
     font-size: 1.5rem;
     margin: 5px;
     color: gainsboro;
+    position: absolute;
+    top: 30px;
+    right: 10px;
   }
   
   a {
@@ -75,6 +86,13 @@ header {
   height: 100%;
   align-items: center;
   flex-direction: column;
+  border-bottom:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-top: 20px;
 }
 
 #game {
@@ -198,7 +216,7 @@ header {
   grid-auto-rows: 3em;
   gap: .25em;
   justify-content: center;
-  
+  padding-bottom: 20px;  
 }
 .key {
   font-size: inherit;
@@ -293,6 +311,18 @@ main {
   font-size: 1.2rem;
 }
 /* footer Styling */
+footer {
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top:rgb(58, 58, 60);
+  border-style: solid;
+  border-width: 1px;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
 .foot-left{
   display: flex;
   margin: 5px;
@@ -302,6 +332,8 @@ main {
   justify-content: flex-start;
   color: gainsboro;
   font-size: 1.2rem;
+  position: absolute;
+  top: 15px;
 }
 
 
@@ -321,4 +353,7 @@ main {
   justify-content: flex-end;
   font-size: 1.2rem;
   color: gainsboro;
+  position: absolute;
+  right: 10px;
+  top: 20px;
 }
