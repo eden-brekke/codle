@@ -110,7 +110,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     playAgainButton.textContent = 'Play Again';
     endGameAlert.appendChild(playAgainButton);
     let aElem = document.createElement('a');
-    aElem.href = '/results.html';
+    aElem.href = '/code-wordle/results.html';
     let resultsButton = document.createElement('button');
     resultsButton.textContent = 'Results';
     aElem.appendChild(resultsButton);
@@ -139,7 +139,7 @@ function winOrLose(results, word, attempts, wordIndex) {
     indexElem.appendChild(playAgainButton);
     endGameAlert.appendChild(playAgainButton);
     let aElem = document.createElement('a');
-    aElem.href = '/results.html';
+    aElem.href = '/code-wordle/results.html';
     let resultsButton = document.createElement('button');
     resultsButton.textContent = 'Results';
     aElem.appendChild(resultsButton);
@@ -250,7 +250,7 @@ function playGame(wordsArr) {
   function enterClicked(event) {
     if ((event.target.matches('[data-enter]'))) {
       if (wordCheck(word, getActiveTile())) {
-        winOrLose(results, word, attempts, wordIndex, wordsArr);
+        winOrLose(results, word, attempts, wordIndex);
       } else {
         letterCheck(word, getActiveTile()); 
         indexCheck(word, getActiveTile());
@@ -267,7 +267,7 @@ function playGame(wordsArr) {
       userGuess = '';
       attempts++;
       if (attempts === 6) {
-        winOrLose(results, word, attempts, wordIndex, wordsArr);
+        winOrLose(results, word, attempts, wordIndex);
       }
     }
   }

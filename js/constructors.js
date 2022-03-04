@@ -62,3 +62,5 @@ new Word('icons','An icon is a glyph used to represent something else.');
 new Word('align','The align attribute specifies the alignment of an <object> element according to the surrounding element. The <object> element is an inline element (it does not insert a new line on a page), meaning that text and other elements can wrap around it.');
 
 new Word('units','units is a generic term used through CSS to adjust styles, it\'s also used in JavaScript to describe mathematic terms');
+
+new Word('loops', 'JavaScript loops are handy for if you want to run the same code over and over again, each time with a different value.');
