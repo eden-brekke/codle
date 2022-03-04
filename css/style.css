@@ -113,13 +113,13 @@ nav {
 
 #alert-container.popup {
   position: absolute;
-  background-color: rgb(146, 208, 204, .85);
+  background-color: rgb(146, 208, 204, .95);
   color: black;
-  top: 90px;
+  top: 10px;
   width: 200px;
   padding: 60px;
   border-radius: 10px;
-  left: 90px;
+  left: 520px;
 }
 
 #alert-container.popup h3 {
@@ -401,4 +401,16 @@ footer {
   position: absolute;
   right: 10px;
   top: 20px;
+}
+
+.pink {
+  color: #C21BA3;
+  font-weight: 800;
+  font-size: 21pt;
+}
+
+.blue {
+  color: #92D0CC ;
+  font-weight: 900;
+  font-size: 21pt;
 }
