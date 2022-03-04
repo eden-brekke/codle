@@ -91,7 +91,7 @@ new Word('table', 'The <table> tag defines an HTML table. An HTML table consists
 
 new Word('style', 'The <style> tag is used to define style information (CSS) for a document.');
 
-new Word('label', 'The <label> HTML element represents a caption for an item in a user interface, primarily used for screen readers. The for attribute of <label> must be equal to the id attribute of the related element to bind them together. A label can also be bound to an element by placing the element inside the <label> element.'
+new Word('label', 'The <label> HTML element represents a caption for an item in a user interface, primarily used for screen readers. The for attribute of <label> must be equal to the id attribute of the related element to bind them together. A label can also be bound to an element by placing the element inside the <label> element.');
 
 new Word('while', 'A while loop executes a block of code within its brackets as long as a specified condition evaluates true.');
 
