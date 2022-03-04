@@ -64,3 +64,29 @@ new Word('align','The align attribute specifies the alignment of an <object> ele
 new Word('units','units is a generic term used through CSS to adjust styles, it\'s also used in JavaScript to describe mathematic terms');
 
 new Word('loops', 'JavaScript loops are handy for if you want to run the same code over and over again, each time with a different value.');
+
+new Word('thead', 'The <thead> tag is used to group header content in an HTML table The <thead> element is used in conjunction with the <tbody> and <tfoot> elements to specify each part of a table (header, body, footer).');
+
+new Word('embed', 'The <embed> tag defines a container for an external resource, such as a web page, a picture, a media player, or a plug-in application.');
+
+new Word('aside', 'The <aside> tag defines some content aside from the content it is placed in. The aside content should be indirectly related to the surrounding content.');
+
+new Word('right', 'The right property affects the horizontal position of a positioned element. This property has no effect on non-positioned elements.');
+
+new Word('order', 'The order property specifies the order of a flexible item relative to the rest of the flexible items inside the same container.');
+
+new Word('width', 'set a width of an element in CSS');
+
+new Word('clear', 'The clear property controls the flow next to floated elements. The clear property specifies what should happen with the element that is next to a floating element.');
+
+new Word('title', 'he <title> tag defines the title of the document. The title must be text-only, and it is shown in the browser\'s title bar or in the page\'s tab. The <title> tag is required in HTML documents!');
+
+new Word('tfoot', 'The <tfoot> tag is used to group footer content in an HTML table. The <tfoot> element is used in conjunction with the <thead> and <tbody> elements to specify each part of a table (footer, header, body).');
+
+new Word('tbody', 'The <tbody> tag is used to group the body content in an HTML table. The <tbody> element is used in conjunction with the <thead> and <tfoot> elements to specify each part of a table (body, header, footer).');
+
+new Word('table', 'The <table> tag defines an HTML table. An HTML table consists of one <table> element and one or more <tr>, <th>, and <td> elements. You can use <tr> for the table row, use <th> for a table header, and use <td> for a table cell.');
+
+new Word('style', 'The <style> tag is used to define style information (CSS) for a document.');
+
+new Word('label', 'The <label> HTML element represents a caption for an item in a user interface, primarily used for screen readers. The for attribute of <label> must be equal to the id attribute of the related element to bind them together. A label can also be bound to an element by placing the element inside the <label> element.');
