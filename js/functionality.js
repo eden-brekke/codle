@@ -3,7 +3,7 @@
 //------------- DOM WINDOW ----------------
 
 let guessGrid = document.querySelector('[data-guess-grid]');
-let alertContainer = document.querySelector("[data-alert-container]");
+// let alertContainer = document.querySelector("[data-alert-container]");
 let endGameAlert = document.getElementById('alert-container');
 
 // ------------- GLOBAL VARIABLES -----------
@@ -26,7 +26,7 @@ function percentCalc(results) {
 function bestStreakCalc(results) {
   let best = parseInt(results.bestStreak);
   let current = parseInt(results.currentStreak);
-  if(best < current) {
+  if (best < current) {
     results.bestStreak = current;
   }
 }
@@ -221,7 +221,16 @@ function danceTile(tiles) {
   });
 }
 
-
+function guessInArray(userGuess) {
+  const onlyWordArray = Word.wordsArr.map(function (wordObject) {
+    return wordObject.word;
+  });
+  if (onlyWordArray.includes(userGuess)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 // --------------- CONTROL FLOW ---------------
 
@@ -242,32 +251,36 @@ function playGame(wordsArr) {
 
   let word = wordSelector();
   console.log(word);
-
+  guessInArray(userGuess, wordsArr);
   let tileCounter = 0;
   let whileClose = 0;
   let attempts = 0;
 
-  function enterClicked(event) {
+  function enterClicked(event, wordsArr) {
     if ((event.target.matches('[data-enter]'))) {
-      if (wordCheck(word, getActiveTile())) {
-        winOrLose(results, word, attempts, wordIndex);
-      } else {
-        letterCheck(word, getActiveTile()); 
-        indexCheck(word, getActiveTile());
-      }
-      while (tileCounter <= whileClose) {
-        for (let i = 1; i < 6; i++) {
-          let rowDivs = document.getElementById(`tile${tileCounter + 1}`);
-          delete rowDivs.dataset.state;
-          tileCounter++;
+      if (guessInArray(userGuess)) {
+        if (wordCheck(word, getActiveTile())) {
+          winOrLose(results, word, attempts, wordIndex);
+        } else {
+          letterCheck(word, getActiveTile());
+          indexCheck(word, getActiveTile());
         }
-      }
-      whileClose += 5;
-      guess = [];
-      userGuess = '';
-      attempts++;
-      if (attempts === 6) {
-        winOrLose(results, word, attempts, wordIndex);
+        while (tileCounter <= whileClose) {
+          for (let i = 1; i < 6; i++) {
+            let rowDivs = document.getElementById(`tile${tileCounter + 1}`);
+            delete rowDivs.dataset.state;
+            tileCounter++;
+          }
+        }
+        whileClose += 5;
+        guess = [];
+        userGuess = '';
+        attempts++;
+        if (attempts === 6) {
+          winOrLose(results, word, attempts, wordIndex);
+        }
+      } else {
+        alert('That word is not in the game, please try another programming term.');
       }
     }
   }
@@ -279,33 +292,3 @@ playGame();
 // -------------- EVENT LISTENERS ---------------
 
 document.addEventListener('click', handleMouseClick);
-
-// -------------- COMMENTED OUT VARIABLES DOM WINDOWS, FUNCTIONS AND LISTENER ----------------------
-
-// let keyboard = document.querySelector("[data-keyboard]");
-// let flipAnimationDuration = 500;
-
-// Flip tile function unused as of now
-// function flipTile(tiles) {
-  //   tiles.forEach(function (tile, index) {
-//     setTimeout(function () {
-//       tile.className = 'tile flip';
-//       tile.addEventListener(
-//         'animationEnd',
-//         function () {
-//           tile.className = 'tile';
-//         },
-//         { once: true }
-//       );
-//     }, (index * flipAnimationDuration) / 5);
-//   });
-// }
-
-// play again functionality still not working #############
-// function handlePlayAgain() {
-//   window.location.reload();
-//   // playGame();
-// }
-
-
-// endGameAlert.addEventListener('submit', handlePlayAgain);

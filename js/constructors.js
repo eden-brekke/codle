@@ -18,7 +18,7 @@ Word.wordsArr = [];
 
 //--------------- CONSTRUCTOR METHODS --------------
 
-// this method capitalizes only the first letter of a word. 
+// this method capitalizes only the first letter of a word.
 Word.prototype.capitalizeFirstLetter = function () {
   return this.word.charAt(0).toUpperCase() + this.word.slice(1);
 };
@@ -64,8 +64,6 @@ new Word('align','The align attribute specifies the alignment of an <object> ele
 new Word('units','units is a generic term used through CSS to adjust styles, it\'s also used in JavaScript to describe mathematic terms.');
 
 new Word('loops','JavaScript loops are handy for if you want to run the same code over and over again, each time with a different value.');
-
-new Word('loops', 'JavaScript loops are handy for if you want to run the same code over and over again, each time with a different value.');
 
 new Word('thead', 'The <thead> tag is used to group header content in an HTML table The <thead> element is used in conjunction with the <tbody> and <tfoot> elements to specify each part of a table (header, body, footer).');
 
