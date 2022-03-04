@@ -250,6 +250,7 @@ function playGame(wordsArr) {
   }
 
   let word = wordSelector();
+  console.log(word);
   guessInArray(userGuess, wordsArr);
   let tileCounter = 0;
   let whileClose = 0;
