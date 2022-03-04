@@ -18,7 +18,7 @@ Word.wordsArr = [];
 
 //--------------- CONSTRUCTOR METHODS --------------
 
-// this method capitalizes only the first letter of a word. 
+// this method capitalizes only the first letter of a word.
 Word.prototype.capitalizeFirstLetter = function () {
   return this.word.charAt(0).toUpperCase() + this.word.slice(1);
 };
@@ -65,8 +65,6 @@ new Word('units','units is a generic term used through CSS to adjust styles, it\
 
 new Word('loops','JavaScript loops are handy for if you want to run the same code over and over again, each time with a different value.');
 
-new Word('loops', 'JavaScript loops are handy for if you want to run the same code over and over again, each time with a different value.');
-
 new Word('thead', 'The <thead> tag is used to group header content in an HTML table The <thead> element is used in conjunction with the <tbody> and <tfoot> elements to specify each part of a table (header, body, footer).');
 
 new Word('embed', 'The <embed> tag defines a container for an external resource, such as a web page, a picture, a media player, or a plug-in application.');
@@ -91,7 +89,7 @@ new Word('table', 'The <table> tag defines an HTML table. An HTML table consists
 
 new Word('style', 'The <style> tag is used to define style information (CSS) for a document.');
 
-new Word('label', 'The <label> HTML element represents a caption for an item in a user interface, primarily used for screen readers. The for attribute of <label> must be equal to the id attribute of the related element to bind them together. A label can also be bound to an element by placing the element inside the <label> element.'
+new Word('label', 'The <label> HTML element represents a caption for an item in a user interface, primarily used for screen readers. The for attribute of <label> must be equal to the id attribute of the related element to bind them together. A label can also be bound to an element by placing the element inside the <label> element.');
 
 new Word('while', 'A while loop executes a block of code within its brackets as long as a specified condition evaluates true.');
 
