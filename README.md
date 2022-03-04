@@ -3,10 +3,10 @@
 [Click here for the Deployed CODLE Website](https://team-salt-lake-city.github.io/code-wordle/)
 
 Team Member Names: 
-* Ben Carter
-* Tanesha Brester
-* Cole Gibbs
-* Eden Brekke
+* Ben Carter : [GitHub](https://github.com/MotoBenny) : [LinkedIn](https://www.linkedin.com/in/benjamin-carter-dev/)
+* Tanesha Brester : [GitHub](https://github.com/taneshaa) : [LinkedIn](https://www.linkedin.com/in/taneshabrester/)
+* Cole Gibbs : [GitHub](https://github.com/colegibbs) : [LinkedIn](https://www.linkedin.com/in/cole-gibbs/)
+* Eden Brekke : [GitHub](https://github.com/eden-brekke) : [LinkedIn](https://www.linkedin.com/in/eden-brekke/)
 
 ## Project Description: <br>
 
