@@ -1,5 +1,5 @@
 # Code Wordle
-
+Hello I must change the read me :) 
 [Click here for the Deployed CODLE Website](https://team-salt-lake-city.github.io/code-wordle/)
 
 Team Member Names: 
